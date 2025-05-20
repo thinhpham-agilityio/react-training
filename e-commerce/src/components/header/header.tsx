@@ -13,8 +13,8 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@/components/ui/sheet';
-import RightNav from './rightNav';
-import { MenuItem, MobileMenuItem } from './menuItem';
+import RightNav from './right-nav';
+import { MenuItem, MobileMenuItem } from './menu-item';
 import Logo from './logo';
 
 const menu = [
