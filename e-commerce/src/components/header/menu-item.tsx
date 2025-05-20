@@ -19,7 +19,7 @@ const MenuItem = (item: MenuItemProps) => {
         href={item.url}
         className={
           path.includes(item.url)
-            ? 'group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground text-chart-1'
+            ? 'group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground text-active'
             : 'group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground'
         }
       >
@@ -36,7 +36,7 @@ const MobileMenuItem = (item: MenuItemProps) => {
     <Link
       key={item.title}
       href={item.url}
-      className={path.includes(item.url) ? 'text-chart-1' : ''}
+      className={path.includes(item.url) ? 'text-active' : ''}
     >
       {item.title}
     </Link>
