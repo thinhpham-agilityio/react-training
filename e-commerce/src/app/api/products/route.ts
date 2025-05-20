@@ -71,5 +71,16 @@ export async function GET(request: NextRequest) {
   products = filterByPrice(products, parseInt(minPrice), parseInt(maxPrice));
   products = paginateProducts(products, parseInt(limit), parseInt(offset));
 
-  return new Response(JSON.stringify(products), { status: 200 });
+  const response = {
+    pagination: {
+      total: res.total,
+      limit: parseInt(limit),
+      offset: parseInt(offset),
+    },
+    data: {
+      products
+    }
+  };
+
+  return new Response(JSON.stringify(response), { status: 200 });
 }
