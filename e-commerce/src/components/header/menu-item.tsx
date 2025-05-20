@@ -20,7 +20,7 @@ const MenuItem = (item: MenuItemProps) => {
         className={
           path.includes(item.url)
             ? 'group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground text-active'
-            : 'group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground'
+            : 'group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm transition-colors hover:bg-muted hover:text-accent-foreground'
         }
       >
         {item.title}
