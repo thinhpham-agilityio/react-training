@@ -11,10 +11,7 @@ interface MenuItemProps {
 }
 
 const MenuItem = (item: MenuItemProps) => {
-  const path = usePathname();
-
-  console.log(path);
-  
+  const path = usePathname();  
 
   return (
     <NavigationMenuItem key={item.title}>
