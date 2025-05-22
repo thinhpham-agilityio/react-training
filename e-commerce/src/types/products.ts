@@ -43,3 +43,14 @@ export interface ProductReview {
   reviewerName: string;
   reviewerEmail: string;
 }
+
+export interface ProductResponse {
+  data: {
+    products: Product[];
+  };
+  pagination: {
+    total: number;
+    limit: number;
+    offset: number;
+  };
+}

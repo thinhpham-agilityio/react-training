@@ -58,9 +58,9 @@ export async function GET(request: NextRequest) {
   const maxPrice = searchParams.get('maxPrice') || '100000';
   const categories = searchParams.getAll('categories');
   const brands = searchParams.getAll('brands');
-  const limit = searchParams.get('limit') || '10';
+  const limit = searchParams.get('limit') || '9';
   const offset = searchParams.get('offset') || '0';
-  const sortBy = searchParams.get('sortBy') || 'id';
+  const sortBy = searchParams.get('sortBy') || 'price';
   const order = searchParams.get('order') || 'asc';
 
   const res = await getAllProducts({ sortBy, order });
@@ -71,5 +71,16 @@ export async function GET(request: NextRequest) {
   products = filterByPrice(products, parseInt(minPrice), parseInt(maxPrice));
   products = paginateProducts(products, parseInt(limit), parseInt(offset));
 
-  return new Response(JSON.stringify(products), { status: 200 });
+  const response = {
+    pagination: {
+      total: res.total,
+      limit: parseInt(limit),
+      offset: parseInt(offset),
+    },
+    data: {
+      products
+    }
+  };
+
+  return new Response(JSON.stringify(response), { status: 200 });
 }
