@@ -11,6 +11,7 @@ interface RequestOptions {
   headers?: Record<string, string>;
   queryParams?: Record<string, string | number | boolean>;
   body?: any;
+  [key: string]: any;
 }
 
 class ApiService {
@@ -21,7 +22,7 @@ class ApiService {
   }
 
   private async request<T>(method: string, endpoint: string, options: RequestOptions = {}): Promise<ApiResponse<T>> {
-    const { headers = {}, queryParams, body } = options;
+    const { headers = {}, queryParams, body, ...otherOptions } = options;
     
     const config: RequestInit = {
       method,
@@ -29,6 +30,7 @@ class ApiService {
         'Content-Type': 'application/json',
         ...headers,
       },
+      ...otherOptions
     };
 
     if (body) {
@@ -37,10 +39,7 @@ class ApiService {
 
     try {
       const url = urlBuilder(`${this.baseUrl}/${endpoint}`, queryParams);
-      console.log(url);
       const response = await fetch(url, config);
-
-      
 
       const data: T = response.status !== 204 ? await response.json() : null;
 
