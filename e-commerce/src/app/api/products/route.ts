@@ -61,7 +61,7 @@ export async function GET(request: NextRequest) {
   const limit = searchParams.get('limit') || '9';
   const offset = searchParams.get('offset') || '0';
   const sortBy = searchParams.get('sortBy') || 'price';
-  const order = searchParams.get('order') || 'asc';
+  const order = searchParams.get('order') || 'desc';
 
   const res = await getAllProducts({ sortBy, order });
 
@@ -81,6 +81,8 @@ export async function GET(request: NextRequest) {
       products
     }
   };
+
+  // await new Promise((resolve) => setTimeout(resolve, 2000));
 
   return new Response(JSON.stringify(response), { status: 200 });
 }
