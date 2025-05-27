@@ -15,7 +15,7 @@ interface ProductCardProps {
   discountPercentage: number;
 }
 
-export default function ProductCard({
+const ProductCard = ({
   className,
   id,
   thumbnail,
@@ -23,7 +23,7 @@ export default function ProductCard({
   rating,
   price,
   discountPercentage
-} : ProductCardProps) {
+} : ProductCardProps) => {
   return (
     <Card className={cn("relative w-full border-0 shadow-none *:p-0 py-0", className)}>
       <Link href={`/shop/${id}`} className="block">
@@ -60,3 +60,5 @@ export default function ProductCard({
     </Card>
   )
 }
+
+export default ProductCard;

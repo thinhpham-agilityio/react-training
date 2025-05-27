@@ -34,14 +34,14 @@ function filterByPrice(
   products: Product[],
   minPrice: number,
   maxPrice: number
-) {
+) {  
   return products.filter(({ price }) => {
     return price >= minPrice && price <= maxPrice;
   });
 }
 
-function filterByCategories(products: Product[], categories: string[]) {
-  if (categories.length === 0) return products;
+function filterByCategories(products: Product[], categories: string | null) {
+  if (!categories) return products;
 
   return products.filter(({ category }) => categories.includes(category));
 }
@@ -56,12 +56,12 @@ export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const minPrice = searchParams.get('minPrice') || '0';
   const maxPrice = searchParams.get('maxPrice') || '100000';
-  const categories = searchParams.getAll('categories');
+  const categories = searchParams.get('category');
   const brands = searchParams.getAll('brands');
   const limit = searchParams.get('limit') || '9';
   const offset = searchParams.get('offset') || '0';
   const sortBy = searchParams.get('sortBy') || 'price';
-  const order = searchParams.get('order') || 'desc';
+  const order = searchParams.get('order') || 'asc';
 
   const res = await getAllProducts({ sortBy, order });
 
@@ -69,11 +69,13 @@ export async function GET(request: NextRequest) {
   products = filterByBrands(products, brands);
   products = filterByCategories(products, categories);
   products = filterByPrice(products, parseInt(minPrice), parseInt(maxPrice));
-  products = paginateProducts(products, parseInt(limit), parseInt(offset));
+  const total = products.length;
+  
+  products = paginateProducts(products, parseInt(limit), parseInt(offset));  
 
   const response = {
     pagination: {
-      total: res.total,
+      total,
       limit: parseInt(limit),
       offset: parseInt(offset),
     },
@@ -81,8 +83,6 @@ export async function GET(request: NextRequest) {
       products
     }
   };
-
-  // await new Promise((resolve) => setTimeout(resolve, 2000));
 
   return new Response(JSON.stringify(response), { status: 200 });
 }

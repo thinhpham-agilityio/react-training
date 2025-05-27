@@ -7,6 +7,7 @@
   --color-background: var(--background);
   --color-background-secondary: var(--background-secondary);
   --color-background-active-link: var(--background-active-link);
+  --color-button-primary: var(--button-primary);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -48,6 +49,7 @@
   --background: oklch(1 0 0);
   --background-secondary: oklch(0.9551 0 0);
   --background-active-link: oklch(0 0 0 / 5.88%);
+  --button-primary: oklch(0 0 0);
   --foreground: oklch(0 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -82,6 +84,7 @@
   --background: oklch(0.145 0 0);
   --background-secondary: oklch(0.205 0 0);
   --background-active-link: oklch(0 0 0 / 5.88%);
+  --button-primary: oklch(1 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);

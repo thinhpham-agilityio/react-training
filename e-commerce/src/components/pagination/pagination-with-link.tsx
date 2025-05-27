@@ -4,13 +4,13 @@ import { type ReactNode } from 'react';
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious
 } from '@/components/ui/pagination';
 import useBuildLink from '@/hooks/useBuildLink';
+import PaginationSelect from './pagination-select';
 
 export interface PaginationWithLinksProps {
   page: number;
@@ -18,11 +18,11 @@ export interface PaginationWithLinksProps {
   totalPageCount: number;
 }
 
-export function PaginationWithLinks({
+const PaginationWithLinks = ({
   page,
-  pageSearchParam,
+  pageSearchParam = 'page',
   totalPageCount
-}: PaginationWithLinksProps) {
+}: PaginationWithLinksProps) => {
   const { buildLink } = useBuildLink();
 
   const renderPageNumbers = () => {
@@ -34,7 +34,7 @@ export function PaginationWithLinks({
         items.push(
           <PaginationItem key={i}>
             <PaginationLink
-              href={buildLink(pageSearchParam, i)}
+              href={buildLink([{ key: pageSearchParam, value: i }])}
               isActive={page === i}
             >
               {i}
@@ -46,7 +46,7 @@ export function PaginationWithLinks({
       items.push(
         <PaginationItem key={1}>
           <PaginationLink
-            href={buildLink(pageSearchParam, 1)}
+            href={buildLink([{ key: pageSearchParam, value: 1 }])}
             isActive={page === 1}
           >
             1
@@ -57,7 +57,7 @@ export function PaginationWithLinks({
       if (page > 3) {
         items.push(
           <PaginationItem key="ellipsis-start">
-            <PaginationEllipsis />
+            <PaginationSelect totalPage={totalPageCount} />
           </PaginationItem>
         );
       }
@@ -69,7 +69,7 @@ export function PaginationWithLinks({
         items.push(
           <PaginationItem key={i}>
             <PaginationLink
-              href={buildLink(pageSearchParam, i)}
+              href={buildLink([{ key: pageSearchParam, value: i }])}
               isActive={page === i}
             >
               {i}
@@ -81,7 +81,7 @@ export function PaginationWithLinks({
       if (page < totalPageCount - 2) {
         items.push(
           <PaginationItem key="ellipsis-end">
-            <PaginationEllipsis />
+            <PaginationSelect totalPage={totalPageCount} />
           </PaginationItem>
         );
       }
@@ -89,7 +89,7 @@ export function PaginationWithLinks({
       items.push(
         <PaginationItem key={totalPageCount}>
           <PaginationLink
-            href={buildLink(pageSearchParam, totalPageCount)}
+            href={buildLink([{ key: pageSearchParam, value: totalPageCount }])}
             isActive={page === totalPageCount}
           >
             {totalPageCount}
@@ -107,7 +107,9 @@ export function PaginationWithLinks({
         <PaginationContent className="max-sm:gap-0 w-full justify-between">
           <PaginationItem>
             <PaginationPrevious
-              href={buildLink(pageSearchParam, Math.max(page - 1, 1))}
+              href={buildLink([
+                { key: pageSearchParam, value: Math.max(page - 1, 1) }
+              ])}
               aria-disabled={page === 1}
               tabIndex={page === 1 ? -1 : undefined}
               className={
@@ -115,13 +117,15 @@ export function PaginationWithLinks({
               }
             />
           </PaginationItem>
-          <div className='flex flex-row'>{renderPageNumbers()}</div>
+          <div className="flex flex-row">{renderPageNumbers()}</div>
           <PaginationItem>
             <PaginationNext
-              href={buildLink(
-                pageSearchParam,
-                Math.min(page + 1, totalPageCount)
-              )}
+              href={buildLink([
+                {
+                  key: pageSearchParam,
+                  value: Math.min(page + 1, totalPageCount)
+                }
+              ])}
               aria-disabled={page === totalPageCount}
               tabIndex={page === totalPageCount ? -1 : undefined}
               className={
@@ -136,3 +140,5 @@ export function PaginationWithLinks({
     </div>
   );
 }
+
+export default PaginationWithLinks;

@@ -14,5 +14,5 @@ export const formatCurrency = (number: number) => {
     }
   );
 
-  return formatter.format(number / 100);
+  return formatter.format(number);
 };
