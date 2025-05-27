@@ -28,7 +28,7 @@ const PriceDisplay = ({
       <p
         className={cn(
           "w-fit rounded-full bg-destructive/10 px-3.5 py-1.5 text-sm font-medium text-destructive",
-          mobile && "right-2 top-2 max-lg:absolute",
+          mobile && "right-2 top-2 max-xl:absolute",
         )}
       >
         -{discountPercentage}%
