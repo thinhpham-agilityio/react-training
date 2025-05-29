@@ -1,5 +1,7 @@
 import FilterContent from "@/components/filter/filter-content";
+import { Skeleton } from "@/components/ui/skeleton";
 import { SlidersHorizontal } from "lucide-react";
+import { Suspense } from "react";
 
 export default async function FiltersPage() {
   return (
@@ -8,7 +10,9 @@ export default async function FiltersPage() {
 				<h2 className='text-xl font-bold'>Filters</h2>
 				<SlidersHorizontal className='size-6 rotate-90 bg-background text-gray' />
 			</div>
-			<FilterContent />
+			<Suspense fallback={<Skeleton className='h-10 w-full' />}>
+				<FilterContent />
+			</Suspense>
 		</div>
 	);
 }
