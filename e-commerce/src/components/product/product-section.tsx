@@ -1,16 +1,14 @@
-import { Product, ProductResponse } from '@/types/products';
 import { Separator } from '../ui/separator';
-import ProductCard from './product-card';
-import apiService from '@/utils/api-service';
-import { Pagination } from '@/types/pagination';
+import ProductCard from '../card/product-card';
 import { Suspense } from 'react';
 import TotalProductSkeleton from '../skeleton/total-product-skeleton';
-import ProductCardSkeleton from '../skeleton/product-card-skeleton';
 import PaginationWithLinks from '../pagination/pagination-with-link';
 import { PAGE_LIMIT } from '@/constants/page';
 import FilterDrawer from '../filter/filter-drawer';
 import SortingProduct from './sorting-product';
 import { addSpaceAndCapitalizeFirstLetter } from '@/utils/text';
+import { getProductList } from '@/actions/product';
+import ProductCardListSkeleton from '../skeleton/product-card-list-skeleton';
 
 interface ProductSectionProps {
   urlParams: {
@@ -31,41 +29,6 @@ interface ProductProps {
   sortBy?: string;
   orderBy?: string;
 }
-
-interface GetProductListProps {
-  offset?: number;
-  minPrice?: string;
-  maxPrice?: string;
-  category?: string;
-  sortBy?: string;
-  order?: string;
-}
-
-const getProductList = async ({
-  offset,
-  maxPrice,
-  minPrice,
-  category,
-  sortBy,
-  order
-}: GetProductListProps) => {
-  const res = await apiService.get<ProductResponse>('api/products', {
-    queryParams: {
-      offset,
-      minPrice,
-      maxPrice,
-      category,
-      sortBy,
-      order
-    },
-    cache: 'force-cache'
-  });
-
-  const products = res.data?.data.products as Product[];
-  const pagination = res.data?.pagination as Pagination;
-
-  return { products, pagination };
-};
 
 const TotalProduct = async ({
   offsetParam,
@@ -184,9 +147,7 @@ const ProductSection = ({ urlParams }: ProductSectionProps) => {
       </Suspense>
       <Suspense
         key={`product-list-${JSON.stringify(urlParams)}`}
-        fallback={[1, 2, 3, 4, 5, 6].map((value) => (
-          <ProductCardSkeleton key={`product-${value}`} />
-        ))}
+        fallback={<ProductCardListSkeleton numberOfProducts={6} />}
       >
         <ProductCardList
           offsetParam={offset}

@@ -25,7 +25,7 @@ const InfoDisplay = ({ product }: InfoDisplayProps) => {
   return (
     <div className="flex flex-col divide-y divide-secondary/10">
       <header className="pb-6">
-        <h2 className="font-integral text-2xl leading-[1.2] md:text-[2rem] lg:text-[2.5rem]">
+        <h2 className="font-integral font-bold text-2xl leading-[1.2] md:text-[2rem] lg:text-[2.5rem]">
           {product.title}
         </h2>
 

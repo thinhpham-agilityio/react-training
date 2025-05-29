@@ -1,11 +1,17 @@
-import { cn } from "@/lib/utils";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
-import Link from "next/link";
-import Image from "next/image";
-import StarRating from "./star-rating";
-import PriceDisplay from "./price-display";
+import { cn } from '@/lib/utils';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from '../ui/card';
+import Link from 'next/link';
+import Image from 'next/image';
+import StarRating from '../product/star-rating';
+import PriceDisplay from '../product/price-display';
 
-interface ProductCardProps { 
+interface ProductCardProps {
   className?: string;
   id: number;
   thumbnail: string;
@@ -23,9 +29,14 @@ const ProductCard = ({
   rating,
   price,
   discountPercentage
-} : ProductCardProps) => {
+}: ProductCardProps) => {
   return (
-    <Card className={cn("relative w-full border-0 shadow-none *:p-0 py-0", className)}>
+    <Card
+      className={cn(
+        'relative w-full border-0 shadow-none *:p-0 py-0',
+        className
+      )}
+    >
       <Link href={`/shop/${id}`} className="block">
         <figure className="relative mb-4 aspect-[86/87] overflow-hidden rounded-[1.25rem] bg-shade-300">
           <Image
@@ -58,7 +69,7 @@ const ProductCard = ({
         />
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
 export default ProductCard;
