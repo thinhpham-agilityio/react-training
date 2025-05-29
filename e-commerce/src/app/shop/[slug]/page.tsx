@@ -1,7 +1,12 @@
-export default function ProductDetailPage({
+import ProductDetailSection from '@/components/product-detail/product-detail-section';
+
+export default async function ProductDetailPage({
   params
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  return <h1>Product {params.slug} Detail</h1>;
+  // Await the params to get the slug
+  const { slug } = await params;
+
+  return <ProductDetailSection slug={slug} />;
 }
