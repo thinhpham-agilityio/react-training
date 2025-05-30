@@ -12,7 +12,7 @@ export default async function ProductDetailPage({
 
   return (
     <Suspense fallback={<ProductInfoSkeleton />}>
-      <ProductDetailSection slug={slug} />;
+      <ProductDetailSection slug={slug} />
     </Suspense>
   )
 }

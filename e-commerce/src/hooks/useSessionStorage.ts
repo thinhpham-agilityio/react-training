@@ -3,18 +3,11 @@ import { useCallback, useEffect, useState } from 'react';
 const useSessionStorage = <T>(key: string, initialValue: T) => {
   const getSessionStorage = useCallback(() => {
     const item = sessionStorage.getItem(key);
-    const latestValue = item ? JSON.parse(item) as T : initialValue;
+    const latestValue = item ? (JSON.parse(item) as T) : initialValue;
     return latestValue;
   }, [key, initialValue]);
 
-  const [storedValue, setStoredValue] = useState<T>(() => {
-    try {
-      const initValue = getSessionStorage();
-      return initValue;
-    } catch {
-      return initialValue;
-    }
-  });
+  const [storedValue, setStoredValue] = useState<T>({ ...initialValue });
 
   const setValue = useCallback(
     (value: T) => {
@@ -43,7 +36,7 @@ const useSessionStorage = <T>(key: string, initialValue: T) => {
   const removeValue = useCallback(() => {
     try {
       // Remove item out of session storage
-      window.sessionStorage.removeItem(key);
+      sessionStorage.removeItem(key);
     } catch {
       // We can't do anything if session storage is not working
     }
@@ -54,7 +47,7 @@ const useSessionStorage = <T>(key: string, initialValue: T) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return {storedValue, setValue, getValue, removeValue};
+  return { storedValue, setValue, getValue, removeValue };
 };
 
 export default useSessionStorage;

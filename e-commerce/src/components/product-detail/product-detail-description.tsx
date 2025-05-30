@@ -5,6 +5,7 @@ import type { Product } from '@/types/products';
 import StarRating from '../product/star-rating';
 import PriceDisplay from '../product/price-display';
 import { Button } from '../ui/button';
+import useCartContext from '@/hooks/useCartContext';
 
 interface InfoDisplayProps {
   product: Product;
@@ -12,6 +13,7 @@ interface InfoDisplayProps {
 
 const InfoDisplay = ({ product }: InfoDisplayProps) => {
   const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCartContext();
 
   const handleQuantityChange = (change: number) => {
     if (quantity <= 1 && change < 0) {
@@ -20,6 +22,12 @@ const InfoDisplay = ({ product }: InfoDisplayProps) => {
     }
 
     setQuantity(quantity + change);
+  };
+
+  const handleAddToCart = () => {
+    addToCart(product, quantity);
+
+    setQuantity(1); // Reset quantity after adding to cart
   };
 
   return (
@@ -56,7 +64,7 @@ const InfoDisplay = ({ product }: InfoDisplayProps) => {
       </div>
 
       <div className="flex items-center justify-between gap-3 py-6 md:gap-4">
-        <div className="flex items-center justify-center gap-6 rounded-full bg-shade-200 px-4 py-3.5 font-medium md:py-4 lg:gap-8 lg:px-5 lg:py-4">
+        <div className="flex items-center justify-center gap-6 rounded-full bg-secondary/10 px-4 py-3.5 font-medium md:py-4 lg:gap-8 lg:px-5 lg:py-4">
           <button
             type="button"
             onClick={() => handleQuantityChange(-1)}
@@ -80,7 +88,7 @@ const InfoDisplay = ({ product }: InfoDisplayProps) => {
 
         <div className="w-full">
           <Button
-            onClick={() => {}}
+            onClick={handleAddToCart}
             className="size-full max-md:py-3.5 lg:py-4"
           >
             Add to Cart
