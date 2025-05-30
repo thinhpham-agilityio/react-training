@@ -1,3 +1,5 @@
+import { Pagination } from './pagination';
+
 export interface Product {
   id: number;
   title: string;
@@ -48,9 +50,5 @@ export interface ProductResponse {
   data: {
     products: Product[];
   };
-  pagination: {
-    total: number;
-    limit: number;
-    offset: number;
-  };
+  pagination: Pagination;
 }

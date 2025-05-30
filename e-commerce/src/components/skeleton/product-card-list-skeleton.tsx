@@ -11,8 +11,8 @@ const ProductCardListSkeleton = ({
     return null;
   }
 
-  return Array.from({ length: numberOfProducts || 4 }).map((value) => (
-    <ProductCardSkeleton key={`product-${value}`} />
+  return Array.from({ length: numberOfProducts || 4 }).map((_, index) => (
+    <ProductCardSkeleton key={`product-${index}`} />
   ));
 };
 

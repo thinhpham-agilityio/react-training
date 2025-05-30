@@ -1,14 +1,19 @@
 export interface CartItem {
   id: number;
-  name: string;
-  imageUrl: string;
+  title: string;
+  thumbnail: string;
+  category: string;
   quantity: number;
   price: number;
+  discountPercentage?: number;
 }
 
 export interface Cart {
-  id: string;
   items: CartItem[];
+  totalPrice: number;
+  subTotalPrice: number;
+  discount: number;
+  fee: number;
 }
 
 export interface CartItemPayload {
@@ -21,7 +26,7 @@ export interface CartPayload {
   userId?: string;
 }
 
-export interface CardDB {
+export interface CartDB {
   id: string;
   items: CartItem[];
   totalQuantity: number;
@@ -30,6 +35,6 @@ export interface CardDB {
 }
 
 export interface CartResponse {
-  data: CardDB;
+  data: CartDB;
   message: string;
 }
