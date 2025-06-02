@@ -1,7 +1,7 @@
 import { CircleUserRound } from 'lucide-react';
 
 import Link from 'next/link';
-import ShoppingCartIcon from '../icon/shopping-cart-icon';
+import ShoppingCartIcon from '../icons/shopping-cart-icon';
 
 const RightNav = () => {
   return (

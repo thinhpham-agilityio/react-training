@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Toaster } from 'sonner';
 import './globals.css';
 import Header from '@/components/header/header';
 import Footer from '@/components/footer/footer';
@@ -20,9 +21,10 @@ export default function RootLayout({
         <AppProvider>
           <div>
             <Header />
-            <div className="container m-auto px-3 lg:px-0">{children}</div>
+            {children}
           </div>
           <Footer />
+          <Toaster />
         </AppProvider>
       </body>
     </html>

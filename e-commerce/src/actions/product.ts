@@ -30,8 +30,14 @@ const getProductList = async ({
       sortBy,
       order
     },
-    cache: 'force-cache'
+    next: {
+      revalidate: 3600 // Revalidate every 1 hour
+    },
   });
+
+  if (res.error) {
+    throw new Error('Failed to fetch products');
+  }
 
   const products = res.data?.data.products as Product[];
   const pagination = res.data?.pagination as Pagination;

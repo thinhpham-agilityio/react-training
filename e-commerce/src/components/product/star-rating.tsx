@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import StarSVG from "../sgv/star";
+import StarSVG from "../icons/star";
 
 interface StarRatingProps {
   rating: number;

@@ -1,5 +1,4 @@
-import { Category } from '@/types/category';
-import apiService from '@/utils/api-service';
+import { getCategoryList } from '@/actions/category';
 import {
 	Accordion,
 	AccordionContent,
@@ -9,11 +8,7 @@ import {
 import CategoryButton from './category-button';
 
 const CategoryFilter = async () => {
-  const res = await apiService.get<Category[]>('api/category', {
-    cache: 'force-cache'
-  });
-
-	const categories = res.data;
+	const categories = await getCategoryList();
 
 	return (
 		<div>

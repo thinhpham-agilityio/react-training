@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { toast } from 'sonner';
 import { Minus, Plus } from 'lucide-react';
 import type { Product } from '@/types/products';
 import StarRating from '../product/star-rating';
@@ -26,6 +27,9 @@ const InfoDisplay = ({ product }: InfoDisplayProps) => {
 
   const handleAddToCart = () => {
     addToCart(product, quantity);
+    toast('Product added to cart successfully!', {
+      description: 'Please check your cart for details.',
+    });
 
     setQuantity(1); // Reset quantity after adding to cart
   };
