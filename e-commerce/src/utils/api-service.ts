@@ -43,6 +43,11 @@ class ApiService {
 
       const data: T = response.status !== 204 ? await response.json() : null;
 
+      if (!response.ok) {
+        const errorMessage = data && typeof data === 'object' && 'error' in data ? (data as any).error : response.statusText;
+        throw new Error(errorMessage || "Something went wrong");
+      }
+
       return {
         data,
         error: null,

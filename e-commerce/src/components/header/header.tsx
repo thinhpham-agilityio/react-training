@@ -26,17 +26,13 @@ const menu = [
   {
     title: 'New arrivals',
     url: '/#new-arrivals'
-  },
-  {
-    title: 'Categories',
-    url: '/#categories'
   }
 ];
 
 const Header = () => {
   return (
     <section className="py-4">
-      <div className="container m-auto">
+      <div className="container m-auto lg:px-3">
         {/* Desktop Menu */}
         <nav className="hidden justify-between lg:flex items-center">
           <div className="flex items-center gap-6">

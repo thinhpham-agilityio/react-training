@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import StarRating from "../product/star-rating";
-import GreenCheck from "../sgv/green-check";
+import GreenCheck from "../icons/green-check";
 
 interface ReviewCardProps {
   rating: number;

@@ -1,6 +1,5 @@
 'use client';
 import { ArrowRight, Tag } from 'lucide-react';
-// import { ButtonLink, InputField } from "@/components";
 import {
   Card,
   CardContent,
@@ -13,6 +12,7 @@ import { formatCurrency } from '@/utils/currency';
 import { Button } from '../ui/button';
 import InputField from '../field/inputField';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 const OrderSummaryCard = () => {
   const [promoCode, setPromoCode] = useState('');
@@ -29,10 +29,16 @@ const OrderSummaryCard = () => {
     setPromoCode(''); // Clear the input after applying
   };
 
+  const handleOrderCheckout = () => {
+    // Mock checkout process
+    toast('Check out successfully!');
+    clearCart(); // Clear the cart after checkout
+  }
+
   const discountAmount = (subTotalPrice * discount) / 100;
 
   return (
-    <Card className="h-fit max-w-[31.5rem] rounded-[1.25rem] border border-border-foreground shadow-none px-6 [&>*]:px-0">
+    <Card className="h-fit sm:w-full lg:max-w-[31.5rem] rounded-[1.25rem] border border-border-foreground shadow-none px-6 [&>*]:px-0">
       <CardHeader className="pt-5">
         <CardTitle>Order Summary</CardTitle>
       </CardHeader>
@@ -77,7 +83,7 @@ const OrderSummaryCard = () => {
           </Button>
         </div>
 
-        <Button onClick={clearCart} className="w-full space-x-3 py-6">
+        <Button onClick={handleOrderCheckout} className="w-full space-x-3 py-6">
           <span>Go to Checkout</span>
           <ArrowRight />
         </Button>
