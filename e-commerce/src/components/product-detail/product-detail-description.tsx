@@ -7,6 +7,7 @@ import StarRating from '../product/star-rating';
 import PriceDisplay from '../product/price-display';
 import { Button } from '../ui/button';
 import useCartContext from '@/hooks/useCartContext';
+import { useSession } from 'next-auth/react';
 
 interface InfoDisplayProps {
   product: Product;
@@ -15,6 +16,7 @@ interface InfoDisplayProps {
 const InfoDisplay = ({ product }: InfoDisplayProps) => {
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCartContext();
+  const { data: session } = useSession();
 
   const handleQuantityChange = (change: number) => {
     if (quantity <= 1 && change < 0) {
@@ -26,10 +28,16 @@ const InfoDisplay = ({ product }: InfoDisplayProps) => {
   };
 
   const handleAddToCart = () => {
+    if (!session?.user) {
+      toast.error('Please log in to use this action.');
+      return;
+    }
+
     addToCart(product, quantity);
     toast('Product added to cart successfully!', {
       description: 'Please check your cart for details.',
     });
+
 
     setQuantity(1); // Reset quantity after adding to cart
   };

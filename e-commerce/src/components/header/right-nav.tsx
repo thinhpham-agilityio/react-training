@@ -1,7 +1,6 @@
-import { CircleUserRound } from 'lucide-react';
-
 import Link from 'next/link';
 import ShoppingCartIcon from '../icons/shopping-cart-icon';
+import ProfileIcon from '../icons/profile-icon';
 
 const RightNav = () => {
   return (
@@ -9,9 +8,7 @@ const RightNav = () => {
       <Link href="/cart" passHref>
         <ShoppingCartIcon />
       </Link>
-      <Link href="/login">
-        <CircleUserRound />
-      </Link>
+      <ProfileIcon />
     </div>
   );
 };
