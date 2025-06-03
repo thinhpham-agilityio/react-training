@@ -7,6 +7,7 @@ import BreadCrumbList from '../breadcrumb/breadcrumb-list';
 import ProductTabSection from './product-tab';
 import RelatedProduct from './related-product';
 import ProductCardListSkeleton from '../skeleton/product-card-list-skeleton';
+import { notFound } from 'next/navigation';
 
 interface ProductDetailSectionProps {
   slug: string;
@@ -14,6 +15,17 @@ interface ProductDetailSectionProps {
 
 const ProductDetailSection = async ({ slug }: ProductDetailSectionProps) => {
   const res = await apiService.get<Product>(`api/products/${slug}`);
+
+  console.log('ProductDetailSection', res);
+  
+  
+  if (res.error && res.status !== 404) {
+    throw new Error('Failed to fetch product details');
+  }
+
+  if (!res.data) {
+    notFound();
+  }
 
   const product = res.data as Product;
 
@@ -27,12 +39,8 @@ const ProductDetailSection = async ({ slug }: ProductDetailSectionProps) => {
         ]}
       />
       <div className="grid grid-row-1 md:grid-cols-2 gap-10">
-        <Suspense fallback={<div>Loading images...</div>}>
-          <ProductImages images={product.images} />
-        </Suspense>
-        <Suspense fallback={<div>Loading product details...</div>}>
-          <ProductDetailDescription product={product} />
-        </Suspense>
+        <ProductImages images={product.images} />
+        <ProductDetailDescription product={product} />
       </div>
       <div className="mt-20">
         <ProductTabSection product={product} />

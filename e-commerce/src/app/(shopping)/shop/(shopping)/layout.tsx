@@ -1,9 +1,15 @@
 import BreadCrumbList from '@/components/breadcrumb/breadcrumb-list';
+import { Metadata } from 'next';
 
 interface ShopLayoutProps {
   productList: React.ReactNode;
   filters: React.ReactNode;
 }
+
+export const metadata: Metadata = {
+  title: 'Shopping',
+  description: 'Shopping page'
+};
 
 export default function ShopLayout({ productList, filters }: ShopLayoutProps) {
   return (

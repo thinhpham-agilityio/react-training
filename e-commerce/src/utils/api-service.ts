@@ -1,3 +1,4 @@
+import CustomError from "@/types/custom-error";
 import { urlBuilder } from "@/utils/urlBuilder";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -45,7 +46,7 @@ class ApiService {
 
       if (!response.ok) {
         const errorMessage = data && typeof data === 'object' && 'error' in data ? (data as any).error : response.statusText;
-        throw new Error(errorMessage || "Something went wrong");
+        throw new CustomError(errorMessage, response.status);
       }
 
       return {
@@ -56,8 +57,8 @@ class ApiService {
     } catch (error) {
       return {
         data: null,
-        error: error instanceof Error ? error.message : 'An unknown error occurred',
-        status: 500,
+        error: error instanceof CustomError ? error.message : 'An unknown error occurred',
+        status: error instanceof CustomError ? error.status : 500
       };
     }
   }
