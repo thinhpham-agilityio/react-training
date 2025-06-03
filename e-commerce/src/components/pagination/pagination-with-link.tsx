@@ -24,6 +24,10 @@ const PaginationWithLinks = ({
   totalPageCount
 }: PaginationWithLinksProps) => {
   const { buildLink } = useBuildLink();
+  const disableNavigation = totalPageCount === 0 || totalPageCount === 1;
+  const disablePrevious = page === 1 || disableNavigation;
+  const disableNext = page === totalPageCount || disableNavigation;
+  
 
   const renderPageNumbers = () => {
     const items: ReactNode[] = [];
@@ -110,10 +114,10 @@ const PaginationWithLinks = ({
               href={buildLink([
                 { key: pageSearchParam, value: Math.max(page - 1, 1) }
               ])}
-              aria-disabled={page === 1}
-              tabIndex={page === 1 ? -1 : undefined}
+              aria-disabled={disablePrevious}
+              tabIndex={disablePrevious ? -1 : undefined}
               className={
-                page === 1 ? 'pointer-events-none opacity-50' : undefined
+                disablePrevious ? 'pointer-events-none opacity-50' : undefined
               }
             />
           </PaginationItem>
@@ -126,10 +130,10 @@ const PaginationWithLinks = ({
                   value: Math.min(page + 1, totalPageCount)
                 }
               ])}
-              aria-disabled={page === totalPageCount}
-              tabIndex={page === totalPageCount ? -1 : undefined}
+              aria-disabled={disableNext}
+              tabIndex={disableNext ? -1 : undefined}
               className={
-                page === totalPageCount
+                disableNext
                   ? 'pointer-events-none opacity-50'
                   : undefined
               }

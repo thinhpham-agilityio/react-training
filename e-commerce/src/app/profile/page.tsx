@@ -1,4 +1,10 @@
 import ProfileSection from "@/components/profile/profile-section";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Profile',
+  description: 'User profile'
+};
 
 export default function ProfilePage() {
   return (

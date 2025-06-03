@@ -48,7 +48,7 @@ const TotalProduct = async ({
   });
 
   const { total = 0, offset = 0, limit = 0 } = pagination || {};
-  const displayStart = offset + 1;
+  const displayStart = total === 0 ? 0 : offset + 1;
   const displayEnd = Math.min(offset + limit, total);
 
   return (

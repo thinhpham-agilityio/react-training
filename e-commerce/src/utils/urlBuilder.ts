@@ -4,7 +4,11 @@ interface FlattenableObject {
 }
 type FlattenedResult = Record<string, string | number | boolean | (string | number | boolean)[]>;
 
-
+/**
+ * Checks if a value is neither undefined nor null.
+ * @param value - The value to check.
+ * @returns - True if the value is defined and not null, false otherwise.
+ */
 const isNotUndefinedOrNull = (value: unknown) => value !== undefined && value !== null;
 
 /**
