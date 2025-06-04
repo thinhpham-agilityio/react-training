@@ -45,7 +45,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           }
           return null;
         }
-      },
+      }
     })
   ],
   pages: {
@@ -54,13 +54,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     authorized: async ({ auth, request: { nextUrl } }) => {
       const isLoggedIn = !!auth?.user;
-      
-      const isPublicPage =
-        nextUrl.pathname === ROUTES.LOGIN;
+
+      const isPublicPage = nextUrl.pathname === ROUTES.LOGIN;
 
       const isAuthenticatedPage =
-        nextUrl.pathname === ROUTES.CART ||
-        nextUrl.pathname === ROUTES.PROFILE;
+        nextUrl.pathname === ROUTES.CART || nextUrl.pathname === ROUTES.PROFILE;
 
       // If the user is not logged in and trying to access an authenticated page, redirect them to the login page
       if (!isLoggedIn && isAuthenticatedPage) {
@@ -74,5 +72,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
       return true;
     }
+  },
+  session: {
+    strategy: 'jwt',
+    maxAge: 60 * 60 // 1 hour
   }
 });
