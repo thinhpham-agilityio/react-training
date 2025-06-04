@@ -12,7 +12,11 @@ interface ProductDetailParams {
 export async function generateMetadata({ params } : ProductDetailParams) {
   const { slug } = await params;
 
-  const res = await apiService.get<Product>(`api/products/${slug}`);
+  const res = await apiService.get<Product>(`api/products/${slug}`, {
+    next: {
+      revalidate: 3600 // Revalidate every 1 hour
+    }
+  });
   if (!res.data) {
     notFound();
   }

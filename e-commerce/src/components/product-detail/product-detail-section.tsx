@@ -14,10 +14,11 @@ interface ProductDetailSectionProps {
 }
 
 const ProductDetailSection = async ({ slug }: ProductDetailSectionProps) => {
-  const res = await apiService.get<Product>(`api/products/${slug}`);
-
-  console.log('ProductDetailSection', res);
-  
+  const res = await apiService.get<Product>(`api/products/${slug}`, {
+    next: {
+      revalidate: 3600 // Revalidate every 1 hour
+    }
+  });
   
   if (res.error && res.status !== 404) {
     throw new Error('Failed to fetch product details');
