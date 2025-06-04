@@ -6,7 +6,7 @@ import type { Product } from '@/types/products';
 import StarRating from '../product/star-rating';
 import PriceDisplay from '../product/price-display';
 import { Button } from '../ui/button';
-import useCartContext from '@/hooks/useCartContext';
+import useCartContext from '@/hooks/use-cart-context';
 import { useSession } from 'next-auth/react';
 
 interface InfoDisplayProps {
@@ -35,9 +35,8 @@ const InfoDisplay = ({ product }: InfoDisplayProps) => {
 
     addToCart(product, quantity);
     toast('Product added to cart successfully!', {
-      description: 'Please check your cart for details.',
+      description: 'Please check your cart for details.'
     });
-
 
     setQuantity(1); // Reset quantity after adding to cart
   };

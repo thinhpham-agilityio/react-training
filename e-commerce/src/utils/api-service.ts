@@ -1,5 +1,5 @@
 import CustomError from "@/types/custom-error";
-import { urlBuilder } from "@/utils/urlBuilder";
+import { urlBuilder } from "@/utils/url-builder";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface ApiResponse<T> {

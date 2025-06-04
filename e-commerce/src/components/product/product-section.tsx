@@ -147,7 +147,7 @@ const ProductSection = ({ urlParams }: ProductSectionProps) => {
       </Suspense>
       <Suspense
         key={`product-list-${JSON.stringify(urlParams)}`}
-        fallback={<ProductCardListSkeleton numberOfProducts={6} />}
+        fallback={<ProductCardListSkeleton numberOfProducts={9} />}
       >
         <ProductCardList
           offsetParam={offset}

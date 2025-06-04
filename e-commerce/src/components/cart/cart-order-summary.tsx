@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card';
-import useCartContext from '@/hooks/useCartContext';
+import useCartContext from '@/hooks/use-cart-context';
 import { formatCurrency } from '@/utils/currency';
 import { Button } from '../ui/button';
 import InputField from '../field/inputField';
@@ -33,7 +33,7 @@ const OrderSummaryCard = () => {
     // Mock checkout process
     toast('Check out successfully!');
     clearCart(); // Clear the cart after checkout
-  }
+  };
 
   const discountAmount = (subTotalPrice * discount) / 100;
 

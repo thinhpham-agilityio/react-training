@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Slider } from '../ui/slider';
 import { MAX_PRICE, MIN_PRICE } from '@/constants/filter';
 import { useRouter, useSearchParams } from 'next/navigation';
-import useBuildLink from '@/hooks/useBuildLink';
+import useBuildLink from '@/hooks/use-build-link';
 import { Button } from '../ui/button';
 
 const PriceFilter = () => {

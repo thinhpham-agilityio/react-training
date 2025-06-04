@@ -1,7 +1,7 @@
 'use client';
 
-import { CartProvider } from '@/hooks/useCartContext';
-import { SessionProvider } from "next-auth/react"
+import { CartProvider } from '@/hooks/use-cart-context';
+import { SessionProvider } from 'next-auth/react';
 import { ReactNode } from 'react';
 
 export default function AppProvider({ children }: { children: ReactNode }) {
