@@ -11,14 +11,15 @@ const ProfileSection = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
-
-  const email = session?.user?.email || 'No email provided';
+  const [email,] = useState<string | null | undefined>(
+    session?.user?.email
+  );
 
   const handleClickLogout = async () => {
     setIsLoggingOut(true);
     try {
       await signOut({
-        redirect: false,
+        redirect: false
       });
       router.push('/');
     } catch {
