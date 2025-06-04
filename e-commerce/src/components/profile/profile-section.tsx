@@ -6,6 +6,7 @@ import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 
 import { Button } from '../ui/button';
+import useCartContext from '@/hooks/use-cart-context';
 
 const ProfileSection = () => {
   const { data: session, status } = useSession();
@@ -14,6 +15,7 @@ const ProfileSection = () => {
   const [email,] = useState<string | null | undefined>(
     session?.user?.email
   );
+  const { clearCart } = useCartContext();
 
   const handleClickLogout = async () => {
     setIsLoggingOut(true);
@@ -21,6 +23,7 @@ const ProfileSection = () => {
       await signOut({
         redirect: false
       });
+      clearCart(); // Clear the cart on logout
       router.push('/');
     } catch {
       toast.error('Failed to log out. Please try again.');
