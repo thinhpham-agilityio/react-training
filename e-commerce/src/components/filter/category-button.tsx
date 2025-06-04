@@ -16,9 +16,14 @@ const CategoryButton = ({ name, slug }: CategoryButtonProps) => {
   const selectedCategory = searchParams.get('category') || '';
   const { buildLink } = useBuildLink();
 
+  const handleClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <Link
       key={slug}
+      scroll={false}
       href={buildLink([{ key: 'category', value: slug }])}
       className={cn(
         `flex items-center justify-between gap-2 py-1 transition-colors hover:no-underline`,
@@ -26,6 +31,7 @@ const CategoryButton = ({ name, slug }: CategoryButtonProps) => {
           ? 'font-medium text-secondary'
           : 'text-secondary/60 hover:text-secondary/80'
       )}
+      onClick={handleClick}
     >
       <span className="capitalize">{name}</span>
       <ChevronRight className="size-4" />

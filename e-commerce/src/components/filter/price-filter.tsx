@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Slider } from '../ui/slider';
 import { MAX_PRICE, MIN_PRICE } from '@/constants/filter';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -17,16 +17,19 @@ const PriceFilter = () => {
   const [from, to] = value;
   const { buildLink } = useBuildLink();
 
-  const handleClickApply = () => {
+  const handleClickApply = useCallback(() => {
     const newUrl = buildLink([
       { key: 'min', value: from },
       { key: 'max', value: to }
     ]);
 
-    router.push(newUrl);
-  };
+    
+    router.push(newUrl, {
+      scroll: false // Prevents scrolling to top on click
+    });
+  }, [from, to, buildLink, router]);
 
-  const handleClickReset = () => {
+  const handleClickReset = useCallback(() => {
     setValue([MIN_PRICE, MAX_PRICE]);
     // Clear the price filters in the URL
     const newUrl = buildLink([
@@ -34,12 +37,15 @@ const PriceFilter = () => {
       { key: 'max', value: undefined }
     ]);
 
-    router.push(newUrl);
-  };
+    router.push(newUrl, {
+      scroll: false // Prevents scrolling to top on click
+    });
+  }, [buildLink, router]);
 
   useEffect(() => {
     // Update the slider value when minPrice or maxPrice changes
     setValue([Number(minPrice), Number(maxPrice)]);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [minPrice, maxPrice]);
 
   return (
