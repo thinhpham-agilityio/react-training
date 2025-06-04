@@ -62,6 +62,7 @@ function PaginationLink({
         }`,
         className
       )}
+      scroll={false} // Prevents scrolling to top on click
       style={{ boxShadow: 'none'}} // Remove default box shadow
       href={props.href || '#'} // Ensure href is always defined
       {...props}

@@ -1,10 +1,10 @@
 'use client';
-import useCartContext from "@/hooks/useCartContext";
-import CartCard from "../card/cart-card";
+import useCartContext from '@/hooks/use-cart-context';
+import CartCard from '../card/cart-card';
 
 const CartSection = () => {
   const { cart, removeFromCart, updateQuantity } = useCartContext();
-  
+
   if (!cart.items.length) {
     return (
       <div className="flex h-40 items-center justify-center rounded-[1.25rem] border border-border-foreground px-4 lg:px-6">
@@ -25,6 +25,6 @@ const CartSection = () => {
       ))}
     </div>
   );
-}
+};
 
 export default CartSection;

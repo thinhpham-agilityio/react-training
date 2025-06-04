@@ -1,13 +1,13 @@
 import { useRef, useState } from 'react';
 import { PaginationEllipsis } from '../ui/pagination';
 import { useRouter, useSearchParams } from 'next/navigation';
-import useOutsideClick from '@/hooks/useOutsideClick';
+import useOutsideClick from '@/hooks/use-outside-click';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { Button } from '../ui/button';
 import { Check, ChevronsUpDown } from 'lucide-react';
 import { Command, CommandGroup, CommandItem, CommandList } from '../ui/command';
 import { cn } from '@/lib/utils';
-import useBuildLink from '@/hooks/useBuildLink';
+import useBuildLink from '@/hooks/use-build-link';
 
 interface PaginationSelectProps {
   totalPage: number;
@@ -37,11 +37,12 @@ const PaginationSelect = ({ totalPage }: PaginationSelectProps) => {
   const handleSelectChange = (currentValue: string) => {
     setSelectedPage(currentValue);
     setOpen(false);
-    const newUrl = buildLink([
-      { key: 'page', value: currentValue },
-    ]);
+    const newUrl = buildLink([{ key: 'page', value: currentValue }]);
 
-    router.push(newUrl);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    router.push(newUrl, {
+      scroll: false // Prevents scrolling to top on click
+    });
   };
 
   useOutsideClick([ref1, ref2], handleOutsideClick);

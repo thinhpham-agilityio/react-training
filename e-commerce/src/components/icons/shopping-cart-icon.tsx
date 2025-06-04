@@ -1,12 +1,15 @@
 'use client';
 
-import useCartContext from '@/hooks/useCartContext';
+import useCartContext from '@/hooks/use-cart-context';
 import { ShoppingCart } from 'lucide-react';
 
 const ShoppingCartIcon = () => {
   const { cart } = useCartContext();
 
-  const itemCount = cart.items.reduce((total, item) => total + item.quantity, 0);
+  const itemCount = cart.items.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
 
   return (
     <div className="relative">

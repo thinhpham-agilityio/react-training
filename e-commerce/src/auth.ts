@@ -3,7 +3,7 @@ import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 
 import { signInSchema } from '@/lib/zod';
-import { getUserFromDb } from '@/lib/getUserFromDb';
+import { getUserFromDb } from '@/lib/get-user-from-db';
 import { ROUTES } from '@/constants/routes';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({

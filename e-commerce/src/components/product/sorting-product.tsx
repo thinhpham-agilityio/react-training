@@ -11,7 +11,7 @@ import {
 } from '../ui/select';
 import { useState } from 'react';
 import { SORT_OPTIONS } from '@/constants/filter';
-import useBuildLink from '@/hooks/useBuildLink';
+import useBuildLink from '@/hooks/use-build-link';
 
 const SortingProduct = () => {
   const router = useRouter();
@@ -33,7 +33,8 @@ const SortingProduct = () => {
       { key: 'orderBy', value: orderBy }
     ]);
 
-    router.push(newUrl);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    router.push(newUrl, { scroll: false }); // Prevents scrolling to top on click
   };
 
   return (

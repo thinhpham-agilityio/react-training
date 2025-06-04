@@ -1,5 +1,5 @@
 import { Cart, CartItem } from '@/types/cart';
-import useSessionStorage from './useSessionStorage';
+import useSessionStorage from './use-session-storage';
 import { Product } from '@/types/products';
 import {
   createContext,

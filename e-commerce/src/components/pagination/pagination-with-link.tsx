@@ -1,6 +1,6 @@
 'use client';
 
-import { type ReactNode } from 'react';
+import { type ReactNode, useCallback } from 'react';
 import {
   Pagination,
   PaginationContent,
@@ -9,7 +9,7 @@ import {
   PaginationNext,
   PaginationPrevious
 } from '@/components/ui/pagination';
-import useBuildLink from '@/hooks/useBuildLink';
+import useBuildLink from '@/hooks/use-build-link';
 import PaginationSelect from './pagination-select';
 
 export interface PaginationWithLinksProps {
@@ -27,7 +27,10 @@ const PaginationWithLinks = ({
   const disableNavigation = totalPageCount === 0 || totalPageCount === 1;
   const disablePrevious = page === 1 || disableNavigation;
   const disableNext = page === totalPageCount || disableNavigation;
-  
+
+  const handlePageClick = useCallback(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
 
   const renderPageNumbers = () => {
     const items: ReactNode[] = [];
@@ -40,6 +43,7 @@ const PaginationWithLinks = ({
             <PaginationLink
               href={buildLink([{ key: pageSearchParam, value: i }])}
               isActive={page === i}
+              onClick={handlePageClick}
             >
               {i}
             </PaginationLink>
@@ -52,6 +56,7 @@ const PaginationWithLinks = ({
           <PaginationLink
             href={buildLink([{ key: pageSearchParam, value: 1 }])}
             isActive={page === 1}
+            onClick={handlePageClick}
           >
             1
           </PaginationLink>
@@ -75,6 +80,7 @@ const PaginationWithLinks = ({
             <PaginationLink
               href={buildLink([{ key: pageSearchParam, value: i }])}
               isActive={page === i}
+              onClick={handlePageClick}
             >
               {i}
             </PaginationLink>
@@ -95,6 +101,7 @@ const PaginationWithLinks = ({
           <PaginationLink
             href={buildLink([{ key: pageSearchParam, value: totalPageCount }])}
             isActive={page === totalPageCount}
+            onClick={handlePageClick}
           >
             {totalPageCount}
           </PaginationLink>
@@ -119,6 +126,7 @@ const PaginationWithLinks = ({
               className={
                 disablePrevious ? 'pointer-events-none opacity-50' : undefined
               }
+              onClick={handlePageClick}
             />
           </PaginationItem>
           <div className="flex flex-row">{renderPageNumbers()}</div>
@@ -133,16 +141,15 @@ const PaginationWithLinks = ({
               aria-disabled={disableNext}
               tabIndex={disableNext ? -1 : undefined}
               className={
-                disableNext
-                  ? 'pointer-events-none opacity-50'
-                  : undefined
+                disableNext ? 'pointer-events-none opacity-50' : undefined
               }
+              onClick={handlePageClick}
             />
           </PaginationItem>
         </PaginationContent>
       </Pagination>
     </div>
   );
-}
+};
 
 export default PaginationWithLinks;
