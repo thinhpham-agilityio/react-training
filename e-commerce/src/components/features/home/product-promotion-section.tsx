@@ -1,6 +1,8 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
 
+import { PROMOTION_PRODUCTS_LIMIT } from '@/constants/skeleton';
+
 import ProductPromotionList from '@/components/features/home/product-promotion-list';
 import { Button } from '@/components/common/ui/button';
 import ProductCardListSkeleton from '@/components/common/skeleton/product-card-list-skeleton';
@@ -22,7 +24,7 @@ const ProductPromotionSection = async ({
       <div className="col-span-2 flex items-center justify-center sm:col-span-3 lg:col-span-4">
         <h2 className="text-[2rem] font-bold">{title}</h2>
       </div>
-      <Suspense fallback={<ProductCardListSkeleton numberOfProducts={4} />}>
+      <Suspense fallback={<ProductCardListSkeleton numberOfProducts={PROMOTION_PRODUCTS_LIMIT} />}>
         <ProductPromotionList />
       </Suspense>
       <div className="col-span-full w-full mb-12 mt-4 md:mb-20">
