@@ -91,12 +91,10 @@ const PaginationSelect = ({ totalPage }: PaginationSelectProps) => {
                   >
                     {page.value}
                     <Check
-                      className={cn(
-                        'ml-auto',
-                        selectedPage === page.value
-                          ? 'opacity-100'
-                          : 'opacity-0'
-                      )}
+                      className={cn('ml-auto', {
+                        'opacity-0': selectedPage !== page.value,
+                        'opacity-100': selectedPage === page.value
+                      })}
                     />
                   </CommandItem>
                 ))}

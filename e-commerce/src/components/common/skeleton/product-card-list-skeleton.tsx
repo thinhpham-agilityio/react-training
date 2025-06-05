@@ -7,7 +7,7 @@ interface ProductCardListSkeletonProps {
 const ProductCardListSkeleton = ({
   numberOfProducts = 0
 }: ProductCardListSkeletonProps) => {
-  if (numberOfProducts < 0) {
+  if (numberOfProducts <= 0) {
     return null;
   }
 

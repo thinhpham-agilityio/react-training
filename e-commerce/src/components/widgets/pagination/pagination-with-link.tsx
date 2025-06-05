@@ -12,6 +12,7 @@ import {
 import PaginationSelect from './pagination-select';
 
 import useBuildLink from '@/hooks/use-build-link';
+import { cn } from '@/lib/utils';
 
 export interface PaginationWithLinksProps {
   page: number;
@@ -124,9 +125,9 @@ const PaginationWithLinks = ({
               ])}
               aria-disabled={disablePrevious}
               tabIndex={disablePrevious ? -1 : undefined}
-              className={
-                disablePrevious ? 'pointer-events-none opacity-50' : undefined
-              }
+              className={cn({
+                'pointer-events-none opacity-50': disablePrevious
+              })}
               onClick={handlePageClick}
             />
           </PaginationItem>
@@ -141,9 +142,9 @@ const PaginationWithLinks = ({
               ])}
               aria-disabled={disableNext}
               tabIndex={disableNext ? -1 : undefined}
-              className={
-                disableNext ? 'pointer-events-none opacity-50' : undefined
-              }
+              className={cn({
+                'pointer-events-none opacity-50': disableNext
+              })}
               onClick={handlePageClick}
             />
           </PaginationItem>
