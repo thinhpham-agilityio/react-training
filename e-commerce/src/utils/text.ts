@@ -4,7 +4,7 @@
  * @returns - Text: 'Hello world'
  */
 export const capitalizeFirstLetter = (string = '') =>
-	string.charAt(0).toUpperCase() + string.slice(1);
+  string.charAt(0).toUpperCase() + string.slice(1);
 
 /**
  * Function format text
@@ -14,14 +14,14 @@ export const capitalizeFirstLetter = (string = '') =>
  * @returns {string} - Update case first letter of the sentence and add a space between words
  */
 export const addSpaceAndCapitalizeFirstLetter = (
-	string: string,
-	sliptCharacter = '-'
+  string: string,
+  sliptCharacter = '-'
 ) => {
-	const words = string.split(sliptCharacter);
-	const result = words
-		.map((word) => capitalizeFirstLetter(word || ''))
-		.join(' ');
-	return result;
+  const words = string.split(sliptCharacter);
+  const result = words
+    .map((word) => capitalizeFirstLetter(word || ''))
+    .join(' ');
+  return result;
 };
 
 /**
@@ -30,5 +30,5 @@ export const addSpaceAndCapitalizeFirstLetter = (
  * @returns - String representation of the number with commas
  */
 export const convertNumberToString = (number: number) => {
-	return number.toLocaleString('en-IN');
+  return number.toLocaleString('en-IN');
 };
