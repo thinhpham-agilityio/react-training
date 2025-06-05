@@ -1,50 +1,46 @@
 'use client';
 
 import { useState } from 'react';
-import { useSession, signOut } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
 
 import { Button } from '../ui/button';
 import useCartContext from '@/hooks/use-cart-context';
+import { userSignOut } from '@/actions/auth';
+import { redirect } from 'next/navigation';
+import { Skeleton } from '../ui/skeleton';
 
 const ProfileSection = () => {
-  const { data: session, status, update: updateSession } = useSession();
-  const router = useRouter();
+  const { data: session, status, update } = useSession();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
-  const [email,] = useState<string | null | undefined>(
-    session?.user?.email
-  );
   const { clearCart } = useCartContext();
+
+  const email = session?.user?.email || '';  
 
   const handleClickLogout = async () => {
     setIsLoggingOut(true);
     try {
-      await signOut({
-        redirect: false
-      });
+      await userSignOut();
       clearCart(); // Clear the cart on logout
-      router.push('/');
-      updateSession(); // Revalidate session
+      await update(); // Update session state
     } catch {
       toast.error('Failed to log out. Please try again.');
       setIsLoggingOut(false);
+      return;
     }
-  };
 
-  if (status === 'loading') {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[200px]">
-        <span className="text-gray-500">Loading profile...</span>
-      </div>
-    );
-  }
+    redirect('/');
+  };
 
   return (
     <>
       <div className="flex flex-col border p-4 border-border-foreground rounded-lg max-w-lg">
         <h2 className="text-lg font-semibold">Email</h2>
-        <p className="mt-2 text-sm text-gray-600">{email}</p>
+        {status === 'loading' || !email ? (
+          <Skeleton className="w-100 h-10" />
+        ) : (
+          <p className="mt-2 text-sm text-primary">{email}</p>
+        )}
       </div>
       <div>
         <Button

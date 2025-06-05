@@ -7,6 +7,7 @@ import { getUserFromDb } from '@/lib/get-user-from-db';
 import { ROUTES } from '@/constants/routes';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  secret: process.env.AUTH_SECRET,
   providers: [
     Credentials({
       credentials: {
@@ -71,6 +72,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
 
       return true;
+    },
+    async session({ session, token }) {
+      if (session?.user) Object?.assign(token, session?.user);
+
+      Object?.assign(session.user, token);
+      return session;
     }
   },
   session: {

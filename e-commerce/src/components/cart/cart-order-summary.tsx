@@ -22,8 +22,6 @@ const OrderSummaryCard = () => {
 
   const handleApplyPromo = () => {
     // Here you would typically validate the promo code and apply the discount
-    // For now, we'll just log it
-    console.log(`Applying promo code: ${promoCode}`);
     updateDiscount(20); // Mock discount application
 
     setPromoCode(''); // Clear the input after applying
@@ -83,7 +81,11 @@ const OrderSummaryCard = () => {
           </Button>
         </div>
 
-        <Button onClick={handleOrderCheckout} className="w-full space-x-3 py-6">
+        <Button
+          disabled={!items.length}
+          onClick={handleOrderCheckout}
+          className="w-full space-x-3 py-6"
+        >
           <span>Go to Checkout</span>
           <ArrowRight />
         </Button>

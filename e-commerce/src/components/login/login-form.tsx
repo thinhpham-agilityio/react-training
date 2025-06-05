@@ -3,17 +3,18 @@ import { useState } from 'react';
 import { EyeIcon, EyeOffIcon, LockIcon, MailIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { signIn, useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signInSchema } from '@/lib/zod';
 import { z } from 'zod';
+import { userSignIn } from '@/actions/auth';
+import { toast } from 'sonner';
+import { redirect } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
-  const { update: updateSession } = useSession();
+  const { update } = useSession();
 
   type FormData = z.infer<typeof signInSchema>;
   const {
@@ -30,18 +31,25 @@ const LoginForm = () => {
   };
 
   const onSubmit = async (data: FormData) => {
-    const res = await signIn('credentials', {
-      email: data.email,
-      password: data.password,
-      redirect: false
-    });
-    if (res?.error) {
-      setError('email', { message: 'Invalid email or password' });
-      setError('password', { message: '' });
-    } else {
-      router.push('/');
-      updateSession(); // Revalidate session
+    try {
+      const res = await userSignIn({
+        email: data.email,
+        password: data.password,
+      });
+      
+      if (res) {
+        setError('email', { message: res });
+        setError('password', { message: '' });
+        return;
+      }
+      
+      await update();
+    } catch {
+      toast.error('Failed to log in. Please try again.');
+      return;
     }
+  
+    redirect('/');
   };
 
   return (
