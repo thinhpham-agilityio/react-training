@@ -8,7 +8,7 @@ import {
   useContext,
   useMemo
 } from 'react';
-import { CART } from '@/constants/storage';
+import { CART_STORAGE } from '@/constants/storage';
 import { calculateTotalPrice } from '@/utils/calculate';
 
 interface CartContextProps {
@@ -42,7 +42,7 @@ const useCartContext = () => {
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const { storedValue: cart, setValue: setCart } = useSessionStorage<Cart>(
-    CART,
+    CART_STORAGE,
     {
       items: [],
       totalPrice: 0,

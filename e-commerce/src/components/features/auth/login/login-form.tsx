@@ -11,7 +11,7 @@ import { z } from 'zod';
 import { Button } from '@/components/common/ui/button';
 import { Input } from '@/components/common/ui/input';
 
-import { signInSchema } from '@/lib/zod';
+import { signInSchema } from '@/lib/schema';
 import { userSignIn } from '@/actions/auth';
 
 const LoginForm = () => {

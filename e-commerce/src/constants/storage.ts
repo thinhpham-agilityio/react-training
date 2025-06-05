@@ -1,1 +1,1 @@
-export const CART = 'cart';
+export const CART_STORAGE = 'cart_storage';

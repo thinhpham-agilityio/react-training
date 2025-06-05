@@ -2,7 +2,7 @@ import { ZodError } from 'zod';
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 
-import { signInSchema } from '@/lib/zod';
+import { signInSchema } from '@/lib/schema';
 import { getUserFromDb } from '@/lib/get-user-from-db';
 import { ROUTES } from '@/constants/routes';
 
