@@ -1,0 +1,62 @@
+import { Suspense } from 'react';
+import { notFound } from 'next/navigation';
+
+import { Product } from '@/types/products';
+
+import ProductDetailDescription from './product-detail-description';
+import ProductImages from './product-images';
+import ProductTabSection from './product-tab';
+import RelatedProduct from './related-product';
+import ProductCardListSkeleton from '@/components/common/skeleton/product-card-list-skeleton';
+
+import apiService from '@/utils/api-service';
+import BreadCrumbList from '@/components/layout/breadcrumb/breadcrumb-list';
+
+interface ProductDetailSectionProps {
+  slug: string;
+}
+
+const ProductDetailSection = async ({ slug }: ProductDetailSectionProps) => {
+  const res = await apiService.get<Product>(`api/products/${slug}`, {
+    next: {
+      revalidate: 3600 // Revalidate every 1 hour
+    }
+  });
+
+  if (res.error && res.status !== 404) {
+    throw new Error('Failed to fetch product details');
+  }
+
+  if (!res.data) {
+    notFound();
+  }
+
+  const product = res.data as Product;
+
+  return (
+    <div>
+      <BreadCrumbList
+        routes={[
+          { text: 'Home', href: '/' },
+          { text: 'Shop', href: '/shop' },
+          { text: product.title }
+        ]}
+      />
+      <div className="grid grid-row-1 md:grid-cols-2 gap-10">
+        <ProductImages images={product.images} />
+        <ProductDetailDescription product={product} />
+      </div>
+      <div className="mt-20">
+        <ProductTabSection product={product} />
+      </div>
+
+      <div className="grid h-fit w-full place-items-center grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4 mt-10 mb-10">
+        <Suspense fallback={<ProductCardListSkeleton numberOfProducts={4} />}>
+          <RelatedProduct category={product.category} productId={product.id} />
+        </Suspense>
+      </div>
+    </div>
+  );
+};
+
+export default ProductDetailSection;

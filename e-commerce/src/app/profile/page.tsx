@@ -1,5 +1,5 @@
-import ProfileSection from "@/components/profile/profile-section";
-import { Metadata } from "next";
+import ProfileSection from '@/components/features/user/profile/profile-section';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Profile',

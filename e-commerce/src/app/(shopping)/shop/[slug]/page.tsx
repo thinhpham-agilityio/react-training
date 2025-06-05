@@ -1,5 +1,5 @@
-import ProductDetailSection from '@/components/product-detail/product-detail-section';
-import ProductInfoSkeleton from '@/components/skeleton/product-info-skeleton';
+import ProductDetailSection from '@/components/features/shopping/product-detail/product-detail-section';
+import ProductInfoSkeleton from '@/components/common/skeleton/product-info-skeleton';
 import { Product } from '@/types/products';
 import apiService from '@/utils/api-service';
 import { notFound } from 'next/navigation';
@@ -9,7 +9,7 @@ interface ProductDetailParams {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params } : ProductDetailParams) {
+export async function generateMetadata({ params }: ProductDetailParams) {
   const { slug } = await params;
 
   const res = await apiService.get<Product>(`api/products/${slug}`, {

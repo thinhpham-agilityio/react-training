@@ -1,13 +1,13 @@
-import ProductSection from '@/components/product/product-section';
+import ProductSection from '@/components/features/shopping/product/product-section';
 
 interface ProductListPageProps {
   searchParams: Promise<{
-    page: string | undefined,
-    min: string | undefined,
-    max: string | undefined,
-    category: string | undefined,
-    sortBy: string | undefined,
-    orderBy: string | undefined,
+    page: string | undefined;
+    min: string | undefined;
+    max: string | undefined;
+    category: string | undefined;
+    sortBy: string | undefined;
+    orderBy: string | undefined;
   }>;
 }
 

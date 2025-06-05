@@ -1,6 +1,6 @@
-import HeroSection from '@/components/home/hero-section';
-import ProductPromotionSection from '@/components/home/product-promotion-section';
-import { Separator } from '@/components/ui/separator';
+import { Separator } from '@/components/common/ui/separator';
+import HeroSection from '@/components/features/home/hero-section';
+import ProductPromotionSection from '@/components/features/home/product-promotion-section';
 
 export default function HomePage() {
   return (

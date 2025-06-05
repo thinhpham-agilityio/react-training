@@ -1,0 +1,106 @@
+'use client';
+import { useState } from 'react';
+import { EyeIcon, EyeOffIcon, LockIcon, MailIcon } from 'lucide-react';
+import { redirect } from 'next/navigation';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useSession } from 'next-auth/react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { z } from 'zod';
+
+import { Button } from '@/components/common/ui/button';
+import { Input } from '@/components/common/ui/input';
+
+import { signInSchema } from '@/lib/zod';
+import { userSignIn } from '@/actions/auth';
+
+const LoginForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const { update } = useSession();
+
+  type FormData = z.infer<typeof signInSchema>;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    setError
+  } = useForm<FormData>({
+    resolver: zodResolver(signInSchema)
+  });
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+  const onSubmit = async (data: FormData) => {
+    try {
+      const res = await userSignIn({
+        email: data.email,
+        password: data.password
+      });
+
+      if (res) {
+        setError('email', { message: res });
+        setError('password', { message: '' });
+        return;
+      }
+
+      await update();
+    } catch {
+      toast.error('Failed to log in. Please try again.');
+      return;
+    }
+
+    redirect('/');
+  };
+
+  return (
+    <form
+      className="w-full max-w-md space-y-2"
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <div className="relative flex items-center rounded-md border focus-within:ring-1 focus-within:ring-ring pl-2">
+        <MailIcon className="h-5 w-5 text-muted-foreground" />
+        <Input
+          id="credentials-email"
+          type="email"
+          placeholder="Email"
+          className="border-0 focus-visible:ring-0 shadow-none"
+          aria-invalid={!!errors.email}
+          {...register('email')}
+        />
+      </div>
+      {errors.email && (
+        <p className="text-[0.8rem] text-destructive">{errors.email.message}</p>
+      )}
+      <div className="relative flex items-center rounded-md border focus-within:ring-1 focus-within:ring-ring px-2">
+        <LockIcon className="h-5 w-5 text-muted-foreground" />
+        <Input
+          id="credentials-password"
+          type={showPassword ? 'text' : 'password'}
+          placeholder="Password"
+          className="border-0 focus-visible:ring-0 shadow-none"
+          aria-invalid={!!errors.password}
+          {...register('password')}
+        />
+        <button type="button" onClick={togglePasswordVisibility}>
+          {showPassword ? (
+            <EyeOffIcon className="h-5 w-5 text-muted-foreground" />
+          ) : (
+            <EyeIcon className="h-5 w-5 text-muted-foreground" />
+          )}
+        </button>
+      </div>
+      {errors.password && (
+        <p className="text-[0.8rem] text-destructive">
+          {errors.password.message}
+        </p>
+      )}
+      <Button type="submit" className="w-full" disabled={isSubmitting}>
+        {isSubmitting ? 'Logging in...' : 'Log In'}
+      </Button>
+    </form>
+  );
+};
+
+export default LoginForm;

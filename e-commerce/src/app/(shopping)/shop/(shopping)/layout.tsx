@@ -1,4 +1,4 @@
-import BreadCrumbList from '@/components/breadcrumb/breadcrumb-list';
+import BreadCrumbList from '@/components/layout/breadcrumb/breadcrumb-list';
 import { Metadata } from 'next';
 
 interface ShopLayoutProps {

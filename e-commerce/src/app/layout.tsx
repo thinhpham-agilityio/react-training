@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { Toaster } from 'sonner';
 import './globals.css';
-import Header from '@/components/header/header';
-import Footer from '@/components/footer/footer';
-import AppProvider from './provider';
+import Header from '@/components/layout/header/header';
+import Footer from '@/components/layout/footer/footer';
+import AppProvider from '@/components/providers/provider';
 
 export const metadata: Metadata = {
   title: 'Shop',
@@ -21,7 +21,7 @@ export default function RootLayout({
         <AppProvider>
           <div>
             <Header />
-            <div className='mt-18'>{children}</div>
+            <div className="mt-18">{children}</div>
           </div>
           <Footer />
           <Toaster />
