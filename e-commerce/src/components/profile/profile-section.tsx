@@ -9,7 +9,7 @@ import { Button } from '../ui/button';
 import useCartContext from '@/hooks/use-cart-context';
 
 const ProfileSection = () => {
-  const { data: session, status } = useSession();
+  const { data: session, status, update: updateSession } = useSession();
   const router = useRouter();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [email,] = useState<string | null | undefined>(
@@ -25,6 +25,7 @@ const ProfileSection = () => {
       });
       clearCart(); // Clear the cart on logout
       router.push('/');
+      updateSession(); // Revalidate session
     } catch {
       toast.error('Failed to log out. Please try again.');
       setIsLoggingOut(false);

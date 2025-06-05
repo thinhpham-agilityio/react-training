@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { EyeIcon, EyeOffIcon, LockIcon, MailIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -13,6 +13,7 @@ import { z } from 'zod';
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+  const { update: updateSession } = useSession();
 
   type FormData = z.infer<typeof signInSchema>;
   const {
@@ -39,6 +40,7 @@ const LoginForm = () => {
       setError('password', { message: '' });
     } else {
       router.push('/');
+      updateSession(); // Revalidate session
     }
   };
 
