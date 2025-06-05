@@ -1,4 +1,5 @@
 import { SlidersHorizontal } from 'lucide-react';
+
 import FilterContent from '@/components/features/shopping/filter/filter-content';
 
 const FilterSection = () => {

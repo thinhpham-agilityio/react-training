@@ -1,10 +1,12 @@
 'use client';
 
-import useBuildLink from '@/hooks/use-build-link';
-import { cn } from '@/lib/utils';
-import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import { ChevronRight } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
+
+import useBuildLink from '@/hooks/use-build-link';
+
+import { cn } from '@/lib/utils';
 
 interface CategoryButtonProps {
   name: string;

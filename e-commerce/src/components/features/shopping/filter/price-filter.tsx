@@ -1,11 +1,13 @@
 'use client';
 
+import { MAX_PRICE, MIN_PRICE } from '@/constants/filter';
+
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { Slider } from '@/components/common/ui/slider';
-import { MAX_PRICE, MIN_PRICE } from '@/constants/filter';
-import { useRouter, useSearchParams } from 'next/navigation';
-import useBuildLink from '@/hooks/use-build-link';
 import { Button } from '@/components/common/ui/button';
+
+import useBuildLink from '@/hooks/use-build-link';
 
 const PriceFilter = () => {
   const router = useRouter();

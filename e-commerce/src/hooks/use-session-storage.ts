@@ -15,8 +15,8 @@ const useSessionStorage = <T>(key: string, initialValue: T) => {
 
       try {
         sessionStorage.setItem(key, JSON.stringify(value));
-      } catch (error) {
-        console.error(`Error setting session storage for key "${key}":`, error);
+      } catch {
+        // If session storage is not working, we can't do anything
       }
     },
     [key]
