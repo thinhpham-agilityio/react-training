@@ -24,8 +24,10 @@ npm install
 ```
 
 4. Set up environment variables:
-Create a `.env.local` file in the root of the project and add the following variables (or you can use your own values):
+Create a `.env.local` file in the root of the project and add the following variables (or you can use your own values)
+
 This guide uses for the local development environment. If you want to run the project in production, you can skip this step and use the `.env.production` file.
+
 In real projects, you should not commit the `.env.local` file to the repository, but for this project, I will commit it to the repository for convenience.
 
 ```bash
