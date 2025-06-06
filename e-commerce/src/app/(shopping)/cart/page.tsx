@@ -1,13 +1,16 @@
-import { Metadata } from 'next';
+import { createMetadata } from '@/utils/metadata';
 
 import BreadCrumbList from '@/components/layout/breadcrumb/breadcrumb-list';
 import CartOrderSummary from '@/components/features/shopping/cart/cart-order-summary';
 import CartSection from '@/components/features/shopping/cart/cart-section';
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: 'Cart',
-  description: 'Cart page'
-};
+  description: 'View and manage the products in your shopping cart on Shop.co',
+  keywords: ['cart', 'shopping cart', 'Shop.co', 'checkout'],
+  url: 'https://react-training-beta-dun.vercel.app/cart',
+  imageAlt: 'Shop.co Cart'
+});
 
 export default function CartPage() {
   return (

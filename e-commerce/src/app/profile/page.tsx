@@ -1,11 +1,14 @@
-import { Metadata } from 'next';
-
 import ProfileSection from '@/components/features/user/profile/profile-section';
+import { createMetadata } from '@/utils/metadata';
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: 'Profile',
-  description: 'User profile'
-};
+  description: 'View and manage your user profile on Shop.co',
+  keywords: ['profile', 'user', 'account', 'Shop.co'],
+  url: 'https://react-training-beta-dun.vercel.app/profile',
+  imageAlt: 'Shop.co Profile',
+  type: 'profile'
+});
 
 export default function ProfilePage() {
   return (

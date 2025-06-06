@@ -1,11 +1,14 @@
-import { Metadata } from 'next';
-
 import LoginForm from '@/components/features/auth/login/login-form';
+import { createMetadata } from '@/utils/metadata';
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: 'Login',
-  description: 'Login page'
-};
+  description:
+    'Login to your Shop.co account to access exclusive deals and manage your profile.',
+  keywords: ['login', 'authentication', 'user', 'Shop.co'],
+  url: 'https://react-training-beta-dun.vercel.app/login',
+  imageAlt: 'Shop.co Login',
+});
 
 export default function LoginPage() {
   return (

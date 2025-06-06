@@ -7,6 +7,7 @@ import ProductDetailSection from '@/components/features/shopping/product-detail/
 import ProductInfoSkeleton from '@/components/common/skeleton/product-info-skeleton';
 
 import apiService from '@/utils/api-service';
+import { createMetadata } from '@/utils/metadata';
 
 interface ProductDetailParams {
   params: Promise<{ slug: string }>;
@@ -26,10 +27,13 @@ export async function generateMetadata({ params }: ProductDetailParams) {
 
   const product = res.data as Product;
 
-  return {
+  return createMetadata({
     title: product.title,
-    description: product.description
-  };
+    description: product.description,
+    url: `https://react-training-beta-dun.vercel.app/shop/${slug}`,
+    imageAlt: product.title,
+    keywords: [product.title, 'Shop.co', 'product'],
+  });
 }
 
 export default async function ProductDetailPage({

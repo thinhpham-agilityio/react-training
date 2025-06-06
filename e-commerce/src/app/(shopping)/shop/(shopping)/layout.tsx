@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import { createMetadata } from '@/utils/metadata';
 
 import BreadCrumbList from '@/components/layout/breadcrumb/breadcrumb-list';
 
@@ -7,10 +7,13 @@ interface ShopLayoutProps {
   filters: React.ReactNode;
 }
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: 'Shopping',
-  description: 'Shopping page'
-};
+  description: 'Browse and shop the latest products on Shop.co',
+  keywords: ['shopping', 'products', 'Shop.co', 'deals'],
+  url: 'https://react-training-beta-dun.vercel.app/shop',
+  imageAlt: 'Shop.co Shopping',
+});
 
 export default function ShopLayout({ productList, filters }: ShopLayoutProps) {
   return (

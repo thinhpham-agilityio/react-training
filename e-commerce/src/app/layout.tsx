@@ -1,15 +1,12 @@
-import type { Metadata } from 'next';
 import { Toaster } from 'sonner';
 
 import './globals.css';
 import Header from '@/components/layout/header/header';
 import Footer from '@/components/layout/footer/footer';
 import AppProvider from '@/components/providers/provider';
+import { createMetadata } from '@/utils/metadata';
 
-export const metadata: Metadata = {
-  title: 'Shop',
-  description: 'Shop App'
-};
+export const metadata = createMetadata();
 
 export default function RootLayout({
   children
