@@ -7,7 +7,7 @@ export const metadata = createMetadata({
     'Login to your Shop.co account to access exclusive deals and manage your profile.',
   keywords: ['login', 'authentication', 'user', 'Shop.co'],
   url: 'https://react-training-beta-dun.vercel.app/login',
-  imageAlt: 'Shop.co Login',
+  imageAlt: 'Shop.co Login'
 });
 
 export default function LoginPage() {

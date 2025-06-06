@@ -82,7 +82,7 @@ const InfoDisplay = ({ product }: InfoDisplayProps) => {
           <button
             type="button"
             onClick={() => handleQuantityChange(-1)}
-            className="active:scale-90"
+            className="cursor-pointer active:scale-90 disabled:cursor-not-allowed disabled:opacity-50"
           >
             <Minus className="size-4 md:size-6" />
           </button>
@@ -94,7 +94,7 @@ const InfoDisplay = ({ product }: InfoDisplayProps) => {
             onClick={() => {
               handleQuantityChange(1);
             }}
-            className="active:scale-90"
+            className="cursor-pointer active:scale-90 disabled:cursor-not-allowed disabled:opacity-50"
           >
             <Plus className="size-4 md:size-6" />
           </button>

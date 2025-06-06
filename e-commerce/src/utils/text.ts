@@ -1,5 +1,5 @@
 /**
- * Function capitalize the first letter of a string
+ * Capitalize the first letter of a string
  * @param string - Text: 'hello world'
  * @returns - Text: 'Hello world'
  */
@@ -7,7 +7,7 @@ export const capitalizeFirstLetter = (string = '') =>
   string.charAt(0).toUpperCase() + string.slice(1);
 
 /**
- * Function format text
+ * Format text by adding a space between words and capitalizing the first letter of each word.
  *
  * @param {string} string - Text: 'hello-world'
  * @param {string} sliptCharacter - The character user want to take for slipt

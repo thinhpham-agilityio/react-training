@@ -1,3 +1,4 @@
+import { Viewport } from 'next';
 import { Toaster } from 'sonner';
 
 import './globals.css';
@@ -7,6 +8,11 @@ import AppProvider from '@/components/providers/provider';
 import { createMetadata } from '@/utils/metadata';
 
 export const metadata = createMetadata();
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1
+};
 
 export default function RootLayout({
   children
