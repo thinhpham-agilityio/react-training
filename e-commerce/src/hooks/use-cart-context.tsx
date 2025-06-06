@@ -1,15 +1,17 @@
-import { Cart, CartItem } from '@/types/cart';
-import useSessionStorage from './use-session-storage';
-import { Product } from '@/types/products';
 import {
   createContext,
   ReactNode,
   useCallback,
   useContext,
-  useMemo
+  useMemo,
+  useReducer,
+  useEffect
 } from 'react';
 import { CART_STORAGE } from '@/constants/storage';
+import { Cart, CartItem } from '@/types/cart';
+import { Product } from '@/types/products';
 import { calculateTotalPrice } from '@/utils/calculate';
+import useSessionStorage from './use-session-storage';
 
 interface CartContextProps {
   cart: Cart;
@@ -31,160 +33,195 @@ const CartContext = createContext<CartContextProps>({
   updateDiscount: () => {}
 });
 
+const initialCart: Cart = {
+  items: [],
+  totalPrice: 0,
+  subTotalPrice: 0,
+  discount: 0,
+  fee: 25 // Default fee, can be adjusted when has api
+};
+
+// Cart action type constants
+export const CART_ACTIONS = {
+  ADD_ITEM: 'ADD_ITEM',
+  REMOVE_ITEM: 'REMOVE_ITEM',
+  UPDATE_QUANTITY: 'UPDATE_QUANTITY',
+  CLEAR_CART: 'CLEAR_CART',
+  UPDATE_DISCOUNT: 'UPDATE_DISCOUNT'
+} as const;
+
+type CartAction =
+  | {
+      type: typeof CART_ACTIONS.ADD_ITEM;
+      payload: { product: Product; quantity: number };
+    }
+  | { type: typeof CART_ACTIONS.REMOVE_ITEM; payload: { itemId: number } }
+  | {
+      type: typeof CART_ACTIONS.UPDATE_QUANTITY;
+      payload: { itemId: number; quantity: number };
+    }
+  | { type: typeof CART_ACTIONS.CLEAR_CART }
+  | {
+      type: typeof CART_ACTIONS.UPDATE_DISCOUNT;
+      payload: { discount: number };
+    };
+
+function cartReducer(state: Cart, action: CartAction): Cart {
+  switch (action.type) {
+    case CART_ACTIONS.ADD_ITEM: {
+      const { product, quantity } = action.payload;
+      const existingItem = state.items.find((item) => item.id === product.id);
+      let newItems;
+      if (existingItem) {
+        newItems = state.items.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + quantity }
+            : item
+        );
+      } else {
+        newItems = [
+          ...state.items,
+          {
+            id: product.id,
+            title: product.title,
+            thumbnail: product.thumbnail,
+            quantity,
+            category: product.category,
+            discountPercentage: product.discountPercentage,
+            price: product.price
+          }
+        ];
+      }
+      const { subTotal, total } = calculateTotalPrice(
+        newItems,
+        state.discount,
+        state.fee
+      );
+      return {
+        ...state,
+        items: newItems,
+        subTotalPrice: subTotal,
+        totalPrice: total
+      };
+    }
+    case CART_ACTIONS.REMOVE_ITEM: {
+      const newItems = state.items.filter(
+        (item) => item.id !== action.payload.itemId
+      );
+      const { subTotal, total } = calculateTotalPrice(
+        newItems,
+        state.discount,
+        state.fee
+      );
+      return {
+        ...state,
+        items: newItems,
+        subTotalPrice: subTotal,
+        totalPrice: total
+      };
+    }
+    case CART_ACTIONS.UPDATE_QUANTITY: {
+      const { itemId, quantity } = action.payload;
+      if (quantity <= 0) {
+        const newItems = state.items.filter((item) => item.id !== itemId);
+        const { subTotal, total } = calculateTotalPrice(
+          newItems,
+          state.discount,
+          state.fee
+        );
+        return {
+          ...state,
+          items: newItems,
+          subTotalPrice: subTotal,
+          totalPrice: total
+        };
+      } else {
+        const newItems = state.items.map((item) =>
+          item.id === itemId ? { ...item, quantity } : item
+        );
+        const { subTotal, total } = calculateTotalPrice(
+          newItems,
+          state.discount,
+          state.fee
+        );
+        return {
+          ...state,
+          items: newItems,
+          subTotalPrice: subTotal,
+          totalPrice: total
+        };
+      }
+    }
+    case CART_ACTIONS.CLEAR_CART: {
+      return { ...initialCart };
+    }
+    case CART_ACTIONS.UPDATE_DISCOUNT: {
+      const { discount } = action.payload;
+      const { subTotal, total } = calculateTotalPrice(
+        state.items,
+        discount,
+        state.fee
+      );
+      return { ...state, discount, subTotalPrice: subTotal, totalPrice: total };
+    }
+    default:
+      return state;
+  }
+}
+
 const useCartContext = () => {
   const context = useContext(CartContext);
   if (!context) {
-    throw new Error('useCartContext must be used within a CardProvider');
+    throw new Error('useCartContext must be used within a CartProvider');
   }
-
   return context;
 };
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const { storedValue: cart, setValue: setCart } = useSessionStorage<Cart>(
+  // Use useSessionStorage to get/set cart in sessionStorage
+  const { storedValue, setValue } = useSessionStorage<Cart>(
     CART_STORAGE,
-    {
-      items: [],
-      totalPrice: 0,
-      subTotalPrice: 0,
-      discount: 0,
-      fee: 25 // Default fee, can be adjusted when has api
-    }
+    initialCart
   );
 
+  // Initialize reducer with value from sessionStorage
+  const [cart, dispatch] = useReducer(cartReducer, storedValue);
+
+  // Sync cart state to sessionStorage whenever cart changes
+  useEffect(() => {
+    setValue(cart);
+  }, [cart, setValue]);
+
   const findItemInCart = useCallback(
-    (itemId: number) => {
-      return cart.items.find((item) => item.id === itemId);
-    },
+    (itemId: number) => cart.items.find((item) => item.id === itemId),
     [cart.items]
   );
 
-  const addToCart = useCallback(
-    (newItem: Product, quantity: number) => {
-      const existingItem = findItemInCart(newItem.id);
+  const addToCart = useCallback((newItem: Product, quantity: number) => {
+    dispatch({
+      type: CART_ACTIONS.ADD_ITEM,
+      payload: { product: newItem, quantity }
+    });
+  }, []);
 
-      if (existingItem) {
-        const newListItem = cart.items.map((item) =>
-          item.id === newItem.id
-            ? {
-                ...item,
-                quantity: item.quantity + quantity
-              }
-            : item
-        );
-        // Recalculate total price after adding the item
-        const { subTotal, total } = calculateTotalPrice(
-          newListItem,
-          cart.discount,
-          cart.fee
-        );
+  const removeFromCart = useCallback((itemId: number) => {
+    dispatch({ type: CART_ACTIONS.REMOVE_ITEM, payload: { itemId } });
+  }, []);
 
-        setCart({
-          ...cart,
-          items: newListItem,
-          subTotalPrice: subTotal,
-          totalPrice: total
-        });
-      } else {
-        const { subTotal, total } = calculateTotalPrice(
-          [...cart.items, { ...newItem, quantity }],
-          cart.discount,
-          cart.fee
-        );
-
-        setCart({
-          ...cart,
-          items: [
-            ...cart.items,
-            {
-              id: newItem.id,
-              title: newItem.title,
-              thumbnail: newItem.thumbnail,
-              quantity,
-              category: newItem.category,
-              discountPercentage: newItem.discountPercentage,
-              price: newItem.price
-            }
-          ],
-          subTotalPrice: subTotal,
-          totalPrice: total
-        });
-      }
-    },
-    [cart, findItemInCart, setCart]
-  );
-
-  const removeFromCart = useCallback(
-    (itemId: number) => {
-      const { subTotal, total } = calculateTotalPrice(
-        cart.items.filter((item) => item.id !== itemId),
-        cart.discount,
-        cart.fee
-      );
-
-      setCart({
-        ...cart,
-        items: cart.items.filter((item) => item.id !== itemId),
-        subTotalPrice: subTotal,
-        totalPrice: total
-      });
-    },
-    [cart, setCart]
-  );
-
-  const updateQuantity = useCallback(
-    (itemId: number, newQuantity: number) => {
-      if (newQuantity <= 0) {
-        removeFromCart(itemId);
-      } else {
-        const { subTotal, total } = calculateTotalPrice(
-          cart.items.map((item) =>
-            item.id === itemId ? { ...item, quantity: newQuantity } : item
-          ),
-          cart.discount,
-          cart.fee
-        );
-
-        setCart({
-          ...cart,
-          items: cart.items.map((item) =>
-            item.id === itemId ? { ...item, quantity: newQuantity } : item
-          ),
-          subTotalPrice: subTotal,
-          totalPrice: total
-        });
-      }
-    },
-    [cart, removeFromCart, setCart]
-  );
+  const updateQuantity = useCallback((itemId: number, newQuantity: number) => {
+    dispatch({
+      type: CART_ACTIONS.UPDATE_QUANTITY,
+      payload: { itemId, quantity: newQuantity }
+    });
+  }, []);
 
   const clearCart = useCallback(() => {
-    setCart({
-      items: [],
-      totalPrice: 0,
-      subTotalPrice: 0,
-      discount: 0,
-      fee: 25 // Default fee, can be adjusted when has api
-    });
-  }, [setCart]);
+    dispatch({ type: CART_ACTIONS.CLEAR_CART });
+  }, []);
 
-  const updateDiscount = useCallback(
-    (discount: number) => {
-      const { subTotal, total } = calculateTotalPrice(
-        cart.items,
-        discount,
-        cart.fee
-      );
-
-      setCart({
-        ...cart,
-        discount,
-        subTotalPrice: subTotal,
-        totalPrice: total
-      });
-    },
-    [cart, setCart]
-  );
+  const updateDiscount = useCallback((discount: number) => {
+    dispatch({ type: CART_ACTIONS.UPDATE_DISCOUNT, payload: { discount } });
+  }, []);
 
   const value = useMemo(
     () => ({
@@ -196,10 +233,18 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       findItemInCart,
       updateDiscount
     }),
-    [cart, addToCart, updateQuantity, removeFromCart, clearCart, findItemInCart, updateDiscount]
+    [
+      cart,
+      addToCart,
+      updateQuantity,
+      removeFromCart,
+      clearCart,
+      findItemInCart,
+      updateDiscount
+    ]
   );
 
-  return <CartContext value={value}>{children}</CartContext>;
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
 
 export default useCartContext;
