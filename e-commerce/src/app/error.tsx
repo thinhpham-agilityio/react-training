@@ -4,7 +4,7 @@ import { AlertTriangle } from 'lucide-react';
 
 import { Button } from '@/components/common/ui/button';
 
-export default function Error() {
+export default function Error({ reset }: { reset: () => void }) {
   return (
     <div className="bg-contained flex min-h-[60vh] flex-col items-center justify-center">
       <div className="bg-contained flex w-full max-w-md flex-col items-center rounded-xl p-8 shadow-lg">
@@ -16,7 +16,7 @@ export default function Error() {
           Failed to fetch data. Please try again later!
         </p>
         <Button
-          onClick={() => window.location.reload()}
+          onClick={() => reset()}
           variant="destructive"
           className="mt-2 w-full"
         >
