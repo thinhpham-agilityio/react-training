@@ -40,21 +40,21 @@ export default function ProductImages({ images }: ProductImagesProps) {
   );
 
   return (
-    <div className="grid lg:grid-cols-[152px_1fr] gap-4 items-center">
+    <div className="grid items-center gap-4 lg:grid-cols-[152px_1fr]">
       <Carousel
-        className="mt-10 max-w-xs flex-col hidden lg:flex"
+        className="mt-10 hidden max-w-xs flex-col lg:flex"
         opts={{
           align: 'start'
         }}
         orientation="vertical"
       >
-        <CarouselContent className="flex gap-2 mt-0 max-h-[200px] lg:max-h-[300px] xl:max-h-[400px]">
+        <CarouselContent className="mt-0 flex max-h-[200px] gap-2 lg:max-h-[300px] xl:max-h-[400px]">
           {images.map((imageUrl, index) => (
             <CarouselItem
               key={index}
               className={cn(
-                'basis-1/5 cursor-pointer pt-1 bg-background-image rounded-lg',
-                current === index + 1 ? 'opacity-100 border-1' : 'opacity-50'
+                'bg-background-image basis-1/5 cursor-pointer rounded-lg pt-1',
+                current === index + 1 ? 'border-1 opacity-100' : 'opacity-50'
               )}
               onClick={() => handleThumbClick(index)}
             >
@@ -63,7 +63,7 @@ export default function ProductImages({ images }: ProductImagesProps) {
                 alt={`Product image ${index + 1}`}
                 width={150}
                 height={167}
-                className="w-auto h-auto"
+                className="h-auto w-auto"
               />
             </CarouselItem>
           ))}
@@ -75,7 +75,7 @@ export default function ProductImages({ images }: ProductImagesProps) {
         <CarouselContent>
           {images.map((imageUrl, index) => (
             <CarouselItem key={index}>
-              <div className="relative bg-background-image rounded-lg p-0">
+              <div className="bg-background-image relative rounded-lg p-0">
                 <Image
                   src={imageUrl}
                   alt={`Product image ${index + 1}`}
@@ -89,17 +89,17 @@ export default function ProductImages({ images }: ProductImagesProps) {
         </CarouselContent>
       </Carousel>
       <Carousel className="mt-4 w-full lg:hidden">
-        <CarouselContent className="flex my-1 ml-0 gap-2">
+        <CarouselContent className="my-1 ml-0 flex gap-2">
           {images.map((imageUrl, index) => (
             <CarouselItem
               key={index}
               className={cn(
-                'basis-1/3 cursor-pointer pt-1 bg-background-image rounded-lg p-0',
-                current === index + 1 ? 'opacity-100 border-1' : 'opacity-50'
+                'bg-background-image basis-1/3 cursor-pointer rounded-lg p-0 pt-1',
+                current === index + 1 ? 'border-1 opacity-100' : 'opacity-50'
               )}
               onClick={() => handleThumbClick(index)}
             >
-              <div className="relative bg-background-image rounded-lg flex items-center justify-center">
+              <div className="bg-background-image relative flex items-center justify-center rounded-lg">
                 <Image
                   src={imageUrl}
                   alt={`Product image ${index + 1}`}

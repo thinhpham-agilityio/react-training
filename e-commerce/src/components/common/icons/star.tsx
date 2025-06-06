@@ -1,8 +1,8 @@
-import { SvgProps } from "@/types/svg";
+import { SvgProps } from '@/types/svg';
 
 const StarSVG: React.FC<SvgProps> = ({
   className,
-  fillColor = "",
+  fillColor = '',
   style,
   ...props
 }) => {

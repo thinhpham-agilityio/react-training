@@ -27,9 +27,9 @@ const PriceDisplay = ({
       <p className="text-gray line-through">{formatCurrency(price)}</p>
       <p
         className={cn(
-          'w-fit rounded-full bg-destructive/10 text-destructive font-medium px-2 py-1 text-[0.625rem] sm:px-3.5 sm:py-1.5 sm:text-xs',
+          'bg-destructive/10 text-destructive w-fit rounded-full px-2 py-1 text-[0.625rem] font-medium sm:px-3.5 sm:py-1.5 sm:text-xs',
           {
-            'right-2 top-2 max-xl:absolute': mobile
+            'top-2 right-2 max-xl:absolute': mobile
           }
         )}
       >

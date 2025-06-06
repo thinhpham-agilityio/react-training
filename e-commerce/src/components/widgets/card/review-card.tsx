@@ -31,8 +31,8 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
   });
 
   return (
-    <Card className="rounded-[1.25rem] bottom-px border-black/10">
-      <CardHeader className="space-y-0 pb-4 pt-2">
+    <Card className="bottom-px rounded-[1.25rem] border-black/10">
+      <CardHeader className="space-y-0 pt-2 pb-4">
         <StarRating rating={rating} rate={false} />
 
         <CardTitle className="flex items-center justify-start gap-2">
@@ -42,10 +42,10 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
         <CardDescription>{reviewerEmail}</CardDescription>
       </CardHeader>
       <CardContent className="pb-4">
-        <p className="text-black/60">&quot;{comment}&quot;</p>
+        <p className="text-primary">&quot;{comment}&quot;</p>
       </CardContent>
       <CardFooter>
-        <p className="text-base font-medium text-black/60">
+        <p className="text-primary text-base font-medium">
           Posted on {formattedDate}
         </p>
       </CardFooter>

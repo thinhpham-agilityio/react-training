@@ -43,7 +43,7 @@ const ProductDetailSection = async ({ slug }: ProductDetailSectionProps) => {
           { text: product.title }
         ]}
       />
-      <div className="grid grid-row-1 md:grid-cols-2 gap-10">
+      <div className="grid-row-1 grid gap-10 md:grid-cols-2">
         <ProductImages images={product.images} />
         <ProductDetailDescription product={product} />
       </div>
@@ -51,8 +51,14 @@ const ProductDetailSection = async ({ slug }: ProductDetailSectionProps) => {
         <ProductTabSection product={product} />
       </div>
 
-      <div className="grid h-fit w-full place-items-center grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4 mt-10 mb-10">
-        <Suspense fallback={<ProductCardListSkeleton numberOfProducts={PROMOTION_PRODUCTS_LIMIT} />}>
+      <div className="mt-10 mb-10 grid h-fit w-full grid-cols-2 place-items-center gap-6 md:grid-cols-3 lg:grid-cols-4">
+        <Suspense
+          fallback={
+            <ProductCardListSkeleton
+              numberOfProducts={PROMOTION_PRODUCTS_LIMIT}
+            />
+          }
+        >
           <RelatedProduct category={product.category} productId={product.id} />
         </Suspense>
       </div>

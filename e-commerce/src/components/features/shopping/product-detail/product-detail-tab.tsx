@@ -6,7 +6,7 @@ interface DetailProps {
 }
 
 const Detail = ({ label, value }: DetailProps) => (
-  <div className="grid grid-cols-2 border-b border-secondary/10 py-4">
+  <div className="border-secondary/10 grid grid-cols-2 border-b py-4">
     <span className="text-primary">{label}</span>
     <span className="font-medium">{value}</span>
   </div>

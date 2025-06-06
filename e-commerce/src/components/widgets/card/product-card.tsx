@@ -35,12 +35,12 @@ const ProductCard = ({
   return (
     <Card
       className={cn(
-        'relative w-full border-0 shadow-none *:p-0 py-0',
+        'relative w-full border-0 py-0 shadow-none *:p-0',
         className
       )}
     >
       <Link href={`/shop/${id}`} className="block">
-        <figure className="relative mb-4 aspect-[86/87] overflow-hidden rounded-[1.25rem] bg-shade-300">
+        <figure className="bg-shade-300 relative mb-4 aspect-[86/87] overflow-hidden rounded-[1.25rem]">
           <Image
             fill
             src={thumbnail}

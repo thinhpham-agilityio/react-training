@@ -19,22 +19,28 @@ const ProductPromotionSection = async ({
   return (
     <div
       id={id}
-      className="container mx-auto px-3 grid h-fit w-full place-items-center grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4 mt-10 mb-10"
+      className="container mx-auto mt-10 mb-10 grid h-fit w-full grid-cols-2 place-items-center gap-6 px-3 md:grid-cols-3 lg:grid-cols-4"
     >
       <div className="col-span-2 flex items-center justify-center sm:col-span-3 lg:col-span-4">
         <h2 className="text-[2rem] font-bold">{title}</h2>
       </div>
-      <Suspense fallback={<ProductCardListSkeleton numberOfProducts={PROMOTION_PRODUCTS_LIMIT} />}>
+      <Suspense
+        fallback={
+          <ProductCardListSkeleton
+            numberOfProducts={PROMOTION_PRODUCTS_LIMIT}
+          />
+        }
+      >
         <ProductPromotionList />
       </Suspense>
-      <div className="col-span-full w-full mb-12 mt-4 md:mb-20">
+      <div className="col-span-full mt-4 mb-12 w-full md:mb-20">
         <div className="flex items-center justify-center">
           <Link
             href="/shop"
-            className="w-full flex items-center justify-center"
+            className="flex w-full items-center justify-center"
           >
             <Button
-              className="w-full lg:w-auto border border-border-foreground"
+              className="border-border-foreground w-full border lg:w-auto"
               size="lg"
               variant="ghost"
             >

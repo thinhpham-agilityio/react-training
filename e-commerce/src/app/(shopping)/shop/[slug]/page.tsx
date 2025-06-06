@@ -1,9 +1,12 @@
+import { Suspense } from 'react';
+import { notFound } from 'next/navigation';
+
+import { Product } from '@/types/products';
+
 import ProductDetailSection from '@/components/features/shopping/product-detail/product-detail-section';
 import ProductInfoSkeleton from '@/components/common/skeleton/product-info-skeleton';
-import { Product } from '@/types/products';
+
 import apiService from '@/utils/api-service';
-import { notFound } from 'next/navigation';
-import { Suspense } from 'react';
 
 interface ProductDetailParams {
   params: Promise<{ slug: string }>;

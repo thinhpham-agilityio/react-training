@@ -1,8 +1,9 @@
 'use client';
 
-import useCartContext from '@/hooks/use-cart-context';
-import { ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
+import { ShoppingCart } from 'lucide-react';
+
+import useCartContext from '@/hooks/use-cart-context';
 
 const ShoppingCartIcon = () => {
   const { cart } = useCartContext();
@@ -17,7 +18,7 @@ const ShoppingCartIcon = () => {
       <div className="relative">
         <ShoppingCart />
         {itemCount > 0 && (
-          <div className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-destructive text-xs text-contained">
+          <div className="bg-destructive text-contained absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full text-xs">
             <span>{`${itemCount}`}</span>
           </div>
         )}

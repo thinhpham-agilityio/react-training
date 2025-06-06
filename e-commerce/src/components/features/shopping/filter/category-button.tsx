@@ -30,7 +30,7 @@ const CategoryButton = ({ name, slug }: CategoryButtonProps) => {
       className={cn(
         `flex items-center justify-between gap-2 py-1 transition-colors hover:no-underline`,
         selectedCategory === slug
-          ? 'font-medium text-secondary'
+          ? 'text-secondary font-medium'
           : 'text-secondary/60 hover:text-secondary/80'
       )}
       onClick={handleClick}

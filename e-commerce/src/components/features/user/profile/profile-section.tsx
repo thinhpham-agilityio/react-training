@@ -35,12 +35,12 @@ const ProfileSection = () => {
 
   return (
     <>
-      <div className="flex flex-col border p-4 border-border-foreground rounded-lg max-w-lg">
+      <div className="border-border-foreground flex max-w-lg flex-col rounded-lg border p-4">
         <h2 className="text-lg font-semibold">Email</h2>
         {status === 'loading' || !email ? (
-          <Skeleton className="w-100 h-10" />
+          <Skeleton className="h-10 w-100" />
         ) : (
-          <p className="mt-2 text-sm text-primary">{email}</p>
+          <p className="text-primary mt-2 text-sm">{email}</p>
         )}
       </div>
       <div>

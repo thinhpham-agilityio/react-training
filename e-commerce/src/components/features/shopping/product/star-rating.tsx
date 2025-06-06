@@ -31,13 +31,13 @@ const StarRating = ({ rating, className, rate = true }: StarRatingProps) => {
               className="fill-star"
               style={{ clipPath: 'inset(0 50% 0 0)' }}
             />
-            <StarSVG className="absolute left-0 top-0 fill-none stroke-star" />
+            <StarSVG className="stroke-star absolute top-0 left-0 fill-none" />
           </div>
         )}
 
         {/* EMPTY STARS */}
         {[...Array(5 - Math.ceil(rating))].map((_, index) => (
-          <StarSVG key={`empty-${index}`} className="fill-none stroke-star" />
+          <StarSVG key={`empty-${index}`} className="stroke-star fill-none" />
         ))}
       </div>
 

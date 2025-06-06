@@ -18,7 +18,7 @@ const ProductInfoSkeleton = () => {
       </div>
 
       {/* INFO DISPLAY SKELETON */}
-      <div className="flex flex-col divide-y divide-secondary/10">
+      <div className="divide-secondary/10 flex flex-col divide-y">
         <header className="pb-6">
           <Skeleton className="h-10 w-3/4 md:h-12 lg:h-14" />
           <Skeleton className="mt-4 h-6 w-32" />

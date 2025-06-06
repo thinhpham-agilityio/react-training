@@ -37,11 +37,11 @@ const OrderSummaryCard = () => {
   const discountAmount = (subTotalPrice * discount) / 100;
 
   return (
-    <Card className="h-fit sm:w-full lg:max-w-[31.5rem] rounded-[1.25rem] border border-border-foreground shadow-none px-6 [&>*]:px-0">
+    <Card className="border-border-foreground h-fit rounded-[1.25rem] border px-6 shadow-none sm:w-full lg:max-w-[31.5rem] [&>*]:px-0">
       <CardHeader className="pt-5">
         <CardTitle>Order Summary</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-5 [&>div>p:nth-child(1)]:text-black/60 [&>div>p:nth-child(2)]:font-bold [&>div]:flex [&>div]:w-full [&>div]:items-center [&>div]:justify-between [&>div]:text-xl">
+      <CardContent className="space-y-5 [&>div]:flex [&>div]:w-full [&>div]:items-center [&>div]:justify-between [&>div]:text-xl [&>div>p:nth-child(1)]:text-black/60 [&>div>p:nth-child(2)]:font-bold">
         <div>
           <p>Subtotal</p>
           <p>{formatCurrency(items.length ? subTotalPrice : 0)}</p>
@@ -57,7 +57,7 @@ const OrderSummaryCard = () => {
           <p>{items.length ? formatCurrency(fee) : 0}</p>
         </div>
       </CardContent>
-      <CardFooter className="w-full flex-col gap-6 border-t border-black/10 pb-5 pt-6">
+      <CardFooter className="w-full flex-col gap-6 border-t border-black/10 pt-6 pb-5">
         <div className="flex w-full items-center justify-between text-xl">
           <p>Total</p>
           <p className="text-2xl font-semibold">
@@ -70,7 +70,7 @@ const OrderSummaryCard = () => {
             value={promoCode}
             onChange={(e) => setPromoCode(e.target.value)}
             placeholder="Add promo code"
-            className="w-full border-none bg-shade-200 placeholder:text-black/40"
+            className="bg-shade-200 w-full border-none placeholder:text-black/40"
             startIcon={<Tag color="#00000066" />}
           />
           <Button

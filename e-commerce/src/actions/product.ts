@@ -1,8 +1,8 @@
 'use server';
 
-import { Pagination } from "@/types/pagination";
-import { Product, ProductResponse } from "@/types/products";
-import apiService from "@/utils/api-service";
+import { Pagination } from '@/types/pagination';
+import { Product, ProductResponse } from '@/types/products';
+import apiService from '@/utils/api-service';
 
 interface GetProductListProps {
   offset?: number;
@@ -32,7 +32,7 @@ const getProductList = async ({
     },
     next: {
       revalidate: 3600 // Revalidate every 1 hour
-    },
+    }
   });
 
   if (res.error) {

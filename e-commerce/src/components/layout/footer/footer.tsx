@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="bg-background-info text-primary py-4 mt-auto">
+    <footer className="bg-background-info text-primary mt-auto py-4">
       <div className="container mx-auto text-center">
         <p>
           &copy; {new Date().getFullYear()} E-Commerce. All rights reserved.

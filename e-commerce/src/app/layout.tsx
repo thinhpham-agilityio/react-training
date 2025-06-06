@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Toaster } from 'sonner';
+
 import './globals.css';
 import Header from '@/components/layout/header/header';
 import Footer from '@/components/layout/footer/footer';
@@ -17,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="min-h-screen flex flex-col">
+      <body className="flex min-h-screen flex-col">
         <AppProvider>
           <div>
             <Header />

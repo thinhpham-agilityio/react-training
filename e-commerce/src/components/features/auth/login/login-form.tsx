@@ -59,40 +59,40 @@ const LoginForm = () => {
       className="w-full max-w-md space-y-2"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className="relative flex items-center rounded-md border focus-within:ring-1 focus-within:ring-ring pl-2">
-        <MailIcon className="h-5 w-5 text-muted-foreground" />
+      <div className="focus-within:ring-ring relative flex items-center rounded-md border pl-2 focus-within:ring-1">
+        <MailIcon className="text-muted-foreground h-5 w-5" />
         <Input
           id="credentials-email"
           type="email"
           placeholder="Email"
-          className="border-0 focus-visible:ring-0 shadow-none"
+          className="border-0 shadow-none focus-visible:ring-0"
           aria-invalid={!!errors.email}
           {...register('email')}
         />
       </div>
       {errors.email && (
-        <p className="text-[0.8rem] text-destructive">{errors.email.message}</p>
+        <p className="text-destructive text-[0.8rem]">{errors.email.message}</p>
       )}
-      <div className="relative flex items-center rounded-md border focus-within:ring-1 focus-within:ring-ring px-2">
-        <LockIcon className="h-5 w-5 text-muted-foreground" />
+      <div className="focus-within:ring-ring relative flex items-center rounded-md border px-2 focus-within:ring-1">
+        <LockIcon className="text-muted-foreground h-5 w-5" />
         <Input
           id="credentials-password"
           type={showPassword ? 'text' : 'password'}
           placeholder="Password"
-          className="border-0 focus-visible:ring-0 shadow-none"
+          className="border-0 shadow-none focus-visible:ring-0"
           aria-invalid={!!errors.password}
           {...register('password')}
         />
         <button type="button" onClick={togglePasswordVisibility}>
           {showPassword ? (
-            <EyeOffIcon className="h-5 w-5 text-muted-foreground" />
+            <EyeOffIcon className="text-muted-foreground h-5 w-5" />
           ) : (
-            <EyeIcon className="h-5 w-5 text-muted-foreground" />
+            <EyeIcon className="text-muted-foreground h-5 w-5" />
           )}
         </button>
       </div>
       {errors.password && (
-        <p className="text-[0.8rem] text-destructive">
+        <p className="text-destructive text-[0.8rem]">
           {errors.password.message}
         </p>
       )}

@@ -79,7 +79,7 @@ const ProductHeader = async (params: ProductProps) => {
         <SortingProduct />
       </div>
 
-      <div className="flex size-8 items-center justify-center rounded-full bg-shade-200 p-2 lg:hidden">
+      <div className="bg-shade-200 flex size-8 items-center justify-center rounded-full p-2 lg:hidden">
         <FilterDrawer />
       </div>
     </header>
@@ -110,16 +110,16 @@ const ProductCardList = async ({
     <>
       {!products || products.length === 0 ? (
         <div className="col-span-2 flex h-full w-full items-center justify-center sm:col-span-3">
-          <p className="text-xl font-bold text-primary">No products found</p>
+          <p className="text-primary text-xl font-bold">No products found</p>
         </div>
       ) : (
         products.map((product) => <ProductCard key={product.id} {...product} />)
       )}
 
-      <div className="col-span-full w-full mt-1">
+      <div className="col-span-full mt-1 w-full">
         <Separator className="bg-border-foreground" />
       </div>
-      <div className="col-span-full w-full mb-12 mt-4 md:mb-20">
+      <div className="col-span-full mt-4 mb-12 w-full md:mb-20">
         <PaginationWithLinks
           page={currentPage}
           totalPageCount={totalPageCount}

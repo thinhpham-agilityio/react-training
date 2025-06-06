@@ -1,13 +1,13 @@
 'use client';
 
-import { CircleUserRound } from "lucide-react";
-import { useSession } from "next-auth/react";
-import Link from "next/link";
+import Link from 'next/link';
+import { CircleUserRound } from 'lucide-react';
+import { useSession } from 'next-auth/react';
 
 const ProfileIcon = () => {
   const { status } = useSession();
 
-  if (status === "authenticated") {
+  if (status === 'authenticated') {
     return (
       <Link href="/profile">
         <CircleUserRound />

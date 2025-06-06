@@ -45,9 +45,9 @@ const InfoDisplay = ({ product }: InfoDisplayProps) => {
   };
 
   return (
-    <div className="flex flex-col divide-y divide-secondary/10">
+    <div className="divide-secondary/10 flex flex-col divide-y">
       <header className="pb-6">
-        <h2 className="font-integral font-bold text-2xl leading-[1.2] md:text-[2rem] lg:text-[2.5rem]">
+        <h2 className="font-integral text-2xl leading-[1.2] font-bold md:text-[2rem] lg:text-[2.5rem]">
           {product.title}
         </h2>
 
@@ -58,7 +58,7 @@ const InfoDisplay = ({ product }: InfoDisplayProps) => {
           discountPercentage={product.discountPercentage}
         />
 
-        <p className="mt-3 leading-[1.375rem] text-primary max-md:text-sm">
+        <p className="text-primary mt-3 leading-[1.375rem] max-md:text-sm">
           {product.description}
         </p>
       </header>
@@ -69,7 +69,7 @@ const InfoDisplay = ({ product }: InfoDisplayProps) => {
           {product.tags.map((tag) => (
             <li
               key={tag}
-              className="rounded-full bg-shade-200 px-5 py-3 capitalize text-primary"
+              className="bg-shade-200 text-primary rounded-full px-5 py-3 capitalize"
             >
               {tag}
             </li>
@@ -78,7 +78,7 @@ const InfoDisplay = ({ product }: InfoDisplayProps) => {
       </div>
 
       <div className="flex items-center justify-between gap-3 py-6 md:gap-4">
-        <div className="flex items-center justify-center gap-6 rounded-full bg-secondary/10 px-4 py-3.5 font-medium md:py-4 lg:gap-8 lg:px-5 lg:py-4">
+        <div className="bg-secondary/10 flex items-center justify-center gap-6 rounded-full px-4 py-3.5 font-medium md:py-4 lg:gap-8 lg:px-5 lg:py-4">
           <button
             type="button"
             onClick={() => handleQuantityChange(-1)}

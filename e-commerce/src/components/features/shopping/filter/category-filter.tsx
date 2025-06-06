@@ -21,7 +21,7 @@ const CategoryFilter = async () => {
           <AccordionContent className="no-scrollbar flex max-h-[calc(100dvh-26rem)] flex-col gap-5 overflow-y-scroll text-left">
             {!categories || categories.length === 0 ? (
               <div className="flex h-full w-full items-center justify-center">
-                <p className="text-sm text-primary">No categories available</p>
+                <p className="text-primary text-sm">No categories available</p>
               </div>
             ) : (
               categories.map(({ slug, name }) => (

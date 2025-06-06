@@ -52,9 +52,9 @@ const PriceFilter = () => {
   return (
     <div>
       <h2 className="text-xl font-bold">Price</h2>
-      <div className="w-full mx-auto">
-        <div className="w-full flex items-center justify-between gap-2">
-          <span className="text-sm text-muted-foreground">{MIN_PRICE}</span>
+      <div className="mx-auto w-full">
+        <div className="flex w-full items-center justify-between gap-2">
+          <span className="text-muted-foreground text-sm">{MIN_PRICE}</span>
           <Slider
             value={value}
             onValueChange={setValue}
@@ -62,13 +62,13 @@ const PriceFilter = () => {
             max={MAX_PRICE}
             step={1}
           />
-          <span className="text-sm text-muted-foreground">{MAX_PRICE}</span>
+          <span className="text-muted-foreground text-sm">{MAX_PRICE}</span>
         </div>
-        <p className="mt-2 text-center text-sm text-muted-foreground">
+        <p className="text-muted-foreground mt-2 text-center text-sm">
           {from} - {to}
         </p>
       </div>
-      <div className="grid gap-2 mt-4 grid-cols-2">
+      <div className="mt-4 grid grid-cols-2 gap-2">
         <Button
           variant="default"
           onClick={handleClickApply}

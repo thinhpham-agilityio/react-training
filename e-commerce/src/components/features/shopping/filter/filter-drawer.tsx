@@ -14,7 +14,7 @@ const FilterDrawer = () => {
   return (
     <Drawer>
       <DrawerTrigger>
-        <SlidersHorizontal className="size-4 rotate-90 text-secondary" />
+        <SlidersHorizontal className="text-secondary size-4 rotate-90" />
       </DrawerTrigger>
 
       <DrawerContent className="pb-6 lg:hidden">
@@ -26,7 +26,7 @@ const FilterDrawer = () => {
           </DrawerClose>
         </DrawerHeader>
 
-        <div className="px-4 flex flex-col gap-3">
+        <div className="flex flex-col gap-3 px-4">
           <FilterContent />
         </div>
       </DrawerContent>

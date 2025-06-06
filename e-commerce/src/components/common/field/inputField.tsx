@@ -27,7 +27,7 @@ const InputField = ({
   return (
     <div className="relative">
       {startIcon && (
-        <div className="absolute left-4 top-1/2 -translate-y-1/2 transform">
+        <div className="absolute top-1/2 left-4 -translate-y-1/2 transform">
           {cloneElement(startIcon as ReactElement<any>, {
             size: 24,
             className: cn('text-muted-foreground', iconClassName),
@@ -38,7 +38,7 @@ const InputField = ({
       <input
         type={type}
         className={cn(
-          'border-input bg-background text-zinc-900 placeholder:text-black/40 ring-offset-background flex min-h-10 w-full rounded-full border px-8 py-3 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 lg:text-base',
+          'border-input bg-background ring-offset-background placeholder:text-secondary/40 focus-visible:ring-secondary flex min-h-10 w-full rounded-full border px-8 py-3 text-sm text-zinc-900 file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 lg:text-base',
           startIcon ? 'pl-12' : '',
           endIcon ? 'pr-12' : '',
           className
@@ -47,7 +47,7 @@ const InputField = ({
         {...props}
       />
       {endIcon && (
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 transform">
+        <div className="absolute top-1/2 right-3 -translate-y-1/2 transform">
           {cloneElement(endIcon as ReactElement<any>, {
             size: 24,
             className: cn('text-muted-foreground', iconClassName),

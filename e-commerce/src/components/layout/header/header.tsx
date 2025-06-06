@@ -31,10 +31,10 @@ const menu = [
 
 const Header = () => {
   return (
-    <section className="py-3 fixed top-0 left-0 w-full z-50 bg-white shadow">
+    <section className="bg-contained fixed top-0 left-0 z-50 w-full py-3 shadow">
       <div className="container m-auto lg:px-3">
         {/* Desktop Menu */}
-        <nav className="hidden justify-between lg:flex items-center">
+        <nav className="hidden items-center justify-between lg:flex">
           <div className="flex items-center gap-6">
             <Logo />
             <div className="flex items-center">

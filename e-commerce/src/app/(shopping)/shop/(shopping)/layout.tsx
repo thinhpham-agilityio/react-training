@@ -1,5 +1,6 @@
-import BreadCrumbList from '@/components/layout/breadcrumb/breadcrumb-list';
 import { Metadata } from 'next';
+
+import BreadCrumbList from '@/components/layout/breadcrumb/breadcrumb-list';
 
 interface ShopLayoutProps {
   productList: React.ReactNode;

@@ -1,5 +1,6 @@
-import LoginForm from "@/components/features/auth/login/login-form";
-import { Metadata } from "next";
+import { Metadata } from 'next';
+
+import LoginForm from '@/components/features/auth/login/login-form';
 
 export const metadata: Metadata = {
   title: 'Login',
@@ -8,8 +9,8 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <div className="mx-auto w-fit mt-60 border border-border-foreground p-15 rounded-xl shadow-lg">
-      <h1 className="text-2xl font-bold mb-6">Login</h1>
+    <div className="border-border-foreground mx-auto mt-60 w-fit rounded-xl border p-15 shadow-lg">
+      <h1 className="mb-6 text-2xl font-bold">Login</h1>
       <LoginForm />
     </div>
   );

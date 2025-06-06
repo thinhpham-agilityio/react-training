@@ -19,8 +19,8 @@ const MenuItem = (item: MenuItemProps) => {
         href={item.url}
         className={
           path.includes(item.url)
-            ? 'group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground text-active'
-            : 'group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm transition-colors hover:bg-muted hover:text-accent-foreground'
+            ? 'group bg-background hover:bg-muted hover:text-accent-foreground text-active inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors'
+            : 'group bg-background hover:bg-muted hover:text-accent-foreground inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm transition-colors'
         }
       >
         {item.title}

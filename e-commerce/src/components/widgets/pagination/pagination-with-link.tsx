@@ -115,9 +115,9 @@ const PaginationWithLinks = ({
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center gap-3 w-full">
+    <div className="flex w-full flex-col items-center gap-3 md:flex-row">
       <Pagination>
-        <PaginationContent className="max-sm:gap-0 w-full justify-between">
+        <PaginationContent className="w-full justify-between max-sm:gap-0">
           <PaginationItem>
             <PaginationPrevious
               href={buildLink([

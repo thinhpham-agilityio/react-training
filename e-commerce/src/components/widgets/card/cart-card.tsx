@@ -39,8 +39,8 @@ const CartCard = ({
   };
 
   return (
-    <Card className="flex flex-row w-full items-center justify-start gap-4 rounded-none border-0 py-4 shadow-none md:py-6">
-      <figure className="relative aspect-square min-w-[6.1875rem] overflow-hidden rounded-lg bg-secondary/10 lg:min-w-[7.75rem]">
+    <Card className="flex w-full flex-row items-center justify-start gap-4 rounded-none border-0 py-4 shadow-none md:py-6">
+      <figure className="bg-secondary/10 relative aspect-square min-w-[6.1875rem] overflow-hidden rounded-lg lg:min-w-[7.75rem]">
         <Image
           src={thumbnail}
           alt={title}
@@ -50,12 +50,12 @@ const CartCard = ({
       </figure>
 
       <div className="flex w-full items-center justify-between">
-        <div className="flex flex-col h-full w-full items-start justify-between gap-2 *:p-0 sm:gap-7">
+        <div className="flex h-full w-full flex-col items-start justify-between gap-2 *:p-0 sm:gap-7">
           <CardHeader className="w-full space-y-0.5">
             <CardTitle className="text-base capitalize md:text-xl">
               {title}
             </CardTitle>
-            <CardDescription className="text-xs text-secondary md:text-sm [&>span]:block">
+            <CardDescription className="text-secondary text-xs md:text-sm [&>span]:block">
               <span>
                 Category: <span className="text-primary">{category}</span>
               </span>
@@ -73,12 +73,12 @@ const CartCard = ({
           <button
             type="button"
             onClick={() => onRemoveFromCart(id)}
-            className="rounded-full bg-secondary/10 p-2"
+            className="bg-secondary/10 rounded-full p-2"
           >
-            <Trash2 className="size-5 stroke-destructive lg:size-6" />
+            <Trash2 className="stroke-destructive size-5 lg:size-6" />
           </button>
 
-          <div className="flex items-center justify-center gap-4 rounded-full bg-secondary/10 px-4 py-1.5 text-sm font-medium lg:gap-5 lg:px-6 lg:py-3">
+          <div className="bg-secondary/10 flex items-center justify-center gap-4 rounded-full px-4 py-1.5 text-sm font-medium lg:gap-5 lg:px-6 lg:py-3">
             <button
               type="button"
               onClick={() => handleQuantityChange(quantity - 1)}

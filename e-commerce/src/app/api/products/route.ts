@@ -34,7 +34,7 @@ function filterByPrice(
   products: Product[],
   minPrice: number,
   maxPrice: number
-) {  
+) {
   return products.filter(({ price }) => {
     return price >= minPrice && price <= maxPrice;
   });
@@ -70,14 +70,14 @@ export async function GET(request: NextRequest) {
   products = filterByCategories(products, categories);
   products = filterByPrice(products, parseInt(minPrice), parseInt(maxPrice));
   const total = products.length;
-  
-  products = paginateProducts(products, parseInt(limit), parseInt(offset));  
+
+  products = paginateProducts(products, parseInt(limit), parseInt(offset));
 
   const response = {
     pagination: {
       total,
       limit: parseInt(limit),
-      offset: parseInt(offset),
+      offset: parseInt(offset)
     },
     data: {
       products

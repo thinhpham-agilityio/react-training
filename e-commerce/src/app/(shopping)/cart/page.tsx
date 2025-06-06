@@ -1,7 +1,8 @@
+import { Metadata } from 'next';
+
 import BreadCrumbList from '@/components/layout/breadcrumb/breadcrumb-list';
 import CartOrderSummary from '@/components/features/shopping/cart/cart-order-summary';
 import CartSection from '@/components/features/shopping/cart/cart-section';
-import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Cart',
