@@ -31,7 +31,7 @@ const menu = [
 
 const Header = () => {
   return (
-    <section className="bg-contained fixed top-0 left-0 z-50 w-full py-3 shadow">
+    <header className="bg-contained fixed top-0 left-0 z-50 w-full py-3 shadow">
       <div className="container m-auto lg:px-3">
         {/* Desktop Menu */}
         <nav className="hidden items-center justify-between lg:flex">
@@ -93,7 +93,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-    </section>
+    </header>
   );
 };
 

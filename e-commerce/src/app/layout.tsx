@@ -19,7 +19,7 @@ export default function RootLayout({
         <AppProvider>
           <div>
             <Header />
-            <div className="mt-18">{children}</div>
+            <div className="mt-[72px]">{children}</div>
           </div>
           <Footer />
           <Toaster />
