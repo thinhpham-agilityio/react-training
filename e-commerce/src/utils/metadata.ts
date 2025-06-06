@@ -9,6 +9,8 @@ interface MetaOptions {
   url?: string;
   imageAlt?: string;
   type?: OpenGraphType;
+  viewport?: string;
+  other?: Record<string, string>;
 }
 
 const defaultMeta = {
@@ -41,6 +43,8 @@ export function createMetadata(options: MetaOptions = {}): Metadata {
       ? defaultMeta.twitterImage
       : '/' + defaultMeta.twitterImage);
   const type: OpenGraphType = options.type || 'website';
+  const viewport = options.viewport || 'width=device-width, initial-scale=1';
+  const charset = options.other?.charset || 'utf-8';
 
   return {
     title,
@@ -84,6 +88,10 @@ export function createMetadata(options: MetaOptions = {}): Metadata {
       site: defaultMeta.twitter,
       creator: defaultMeta.twitter
     },
-    metadataBase: new URL(defaultMeta.baseUrl)
+    metadataBase: new URL(defaultMeta.baseUrl),
+    viewport,
+    other: {
+      charset
+    }
   };
 }
