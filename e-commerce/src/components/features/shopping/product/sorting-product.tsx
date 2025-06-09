@@ -44,7 +44,7 @@ const SortingProduct = () => {
     <div className="flex items-center justify-between gap-4 max-lg:hidden">
       <p className="text-primary">Sort by:</p>
       <Select onValueChange={handleSortChange} value={sort}>
-        <SelectTrigger className="w-[180px] border-none shadow-none focus:shadow-none">
+        <SelectTrigger aria-label="sorting-select" className="w-[180px] border-none shadow-none focus:shadow-none">
           <SelectValue placeholder="Select sorting" />
         </SelectTrigger>
         <SelectContent>
