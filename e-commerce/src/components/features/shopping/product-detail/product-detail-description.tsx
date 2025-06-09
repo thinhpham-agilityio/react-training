@@ -81,6 +81,7 @@ const InfoDisplay = ({ product }: InfoDisplayProps) => {
         <div className="bg-secondary/10 flex items-center justify-center gap-6 rounded-full px-4 py-3.5 font-medium md:py-4 lg:gap-8 lg:px-5 lg:py-4">
           <button
             type="button"
+            aria-label="Decrease quantity"
             onClick={() => handleQuantityChange(-1)}
             className="cursor-pointer active:scale-90 disabled:cursor-not-allowed disabled:opacity-50"
           >
@@ -91,6 +92,7 @@ const InfoDisplay = ({ product }: InfoDisplayProps) => {
 
           <button
             type="button"
+            aria-label="Increase quantity"
             onClick={() => {
               handleQuantityChange(1);
             }}
