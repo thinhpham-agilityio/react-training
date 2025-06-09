@@ -53,7 +53,7 @@ export default function ProductImages({ images }: ProductImagesProps) {
             <CarouselItem
               key={index}
               className={cn(
-                'bg-background-image basis-1/5 cursor-pointer rounded-lg pt-1',
+                'bg-background-image min-h-[167px] basis-1/5 cursor-pointer rounded-lg pt-1',
                 current === index + 1 ? 'border-1 opacity-100' : 'opacity-50'
               )}
               onClick={() => handleThumbClick(index)}

@@ -1,5 +1,4 @@
 import { Suspense } from 'react';
-import { notFound } from 'next/navigation';
 
 import { PROMOTION_PRODUCTS_LIMIT } from '@/constants/skeleton';
 import { Product } from '@/types/products';
@@ -10,30 +9,13 @@ import ProductImages from './product-images';
 import ProductTabSection from './product-tab';
 import RelatedProduct from './related-product';
 
-import apiService from '@/utils/api-service';
 import BreadCrumbList from '@/components/layout/breadcrumb/breadcrumb-list';
 
 interface ProductDetailSectionProps {
-  slug: string;
+  product: Product;
 }
 
-const ProductDetailSection = async ({ slug }: ProductDetailSectionProps) => {
-  const res = await apiService.get<Product>(`api/products/${slug}`, {
-    next: {
-      revalidate: 3600 // Revalidate every 1 hour
-    }
-  });
-
-  if (res.error && res.status !== 404) {
-    throw new Error('Failed to fetch product details');
-  }
-
-  if (!res.data) {
-    notFound();
-  }
-
-  const product = res.data as Product;
-
+const ProductDetailSection = ({ product }: ProductDetailSectionProps) => {
   return (
     <div>
       <BreadCrumbList

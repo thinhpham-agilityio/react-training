@@ -46,6 +46,7 @@ const ProductCard = ({
             src={thumbnail}
             className="object-cover transition-all duration-300 hover:scale-105"
             alt="Product Image"
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, (min-width: 1281px) 20vw"
           />
         </figure>
       </Link>
