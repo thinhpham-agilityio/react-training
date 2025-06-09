@@ -9,14 +9,14 @@ const ProfileIcon = () => {
 
   if (status === 'authenticated') {
     return (
-      <Link href="/profile">
+      <Link aria-label="profile" href="/profile">
         <CircleUserRound />
       </Link>
     );
   }
 
   return (
-    <Link href="/login">
+    <Link aria-label="login" href="/login">
       <CircleUserRound />
     </Link>
   );

@@ -5,13 +5,14 @@ import {
   useContext,
   useMemo,
   useReducer,
-  useEffect
+  useEffect,
 } from 'react';
 import { CART_STORAGE } from '@/constants/storage';
 import { Cart, CartItem } from '@/types/cart';
 import { Product } from '@/types/products';
 import { calculateTotalPrice } from '@/utils/calculate';
 import useSessionStorage from './use-session-storage';
+import _ from 'lodash';
 
 interface CartContextProps {
   cart: Cart;
@@ -47,7 +48,8 @@ export const CART_ACTIONS = {
   REMOVE_ITEM: 'REMOVE_ITEM',
   UPDATE_QUANTITY: 'UPDATE_QUANTITY',
   CLEAR_CART: 'CLEAR_CART',
-  UPDATE_DISCOUNT: 'UPDATE_DISCOUNT'
+  UPDATE_DISCOUNT: 'UPDATE_DISCOUNT',
+  GET_CART: 'GET_CART'
 } as const;
 
 type CartAction =
@@ -64,7 +66,8 @@ type CartAction =
   | {
       type: typeof CART_ACTIONS.UPDATE_DISCOUNT;
       payload: { discount: number };
-    };
+  }
+  | { type: typeof CART_ACTIONS.GET_CART; payload: { cart: Cart } };
 
 function cartReducer(state: Cart, action: CartAction): Cart {
   switch (action.type) {
@@ -164,6 +167,9 @@ function cartReducer(state: Cart, action: CartAction): Cart {
       );
       return { ...state, discount, subTotalPrice: subTotal, totalPrice: total };
     }
+    case CART_ACTIONS.GET_CART: {
+      return action.payload.cart;
+    }
     default:
       return state;
   }
@@ -189,8 +195,18 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   // Sync cart state to sessionStorage whenever cart changes
   useEffect(() => {
-    setValue(cart);
+    if (!_.isEqual(cart, initialCart)) {
+      setValue(cart);
+    }
   }, [cart, setValue]);
+
+  // Load cart from sessionStorage when component mounts
+  useEffect(() => {
+    if (storedValue) {
+      dispatch({ type: CART_ACTIONS.GET_CART, payload: { cart: storedValue } });
+    }
+  }
+  , [storedValue]);
 
   const findItemInCart = useCallback(
     (itemId: number) => cart.items.find((item) => item.id === itemId),
@@ -217,7 +233,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const clearCart = useCallback(() => {
     dispatch({ type: CART_ACTIONS.CLEAR_CART });
-  }, []);
+    setValue(initialCart); // Clear session storage as well
+  }, [setValue]);
 
   const updateDiscount = useCallback((discount: number) => {
     dispatch({ type: CART_ACTIONS.UPDATE_DISCOUNT, payload: { discount } });

@@ -13,7 +13,7 @@ import FilterContent from '@/components/features/shopping/filter/filter-content'
 const FilterDrawer = () => {
   return (
     <Drawer>
-      <DrawerTrigger>
+      <DrawerTrigger aria-label="filter-drawer">
         <SlidersHorizontal className="text-secondary size-4 rotate-90" />
       </DrawerTrigger>
 

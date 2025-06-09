@@ -131,7 +131,11 @@ const PaginationWithLinks = ({
               onClick={handlePageClick}
             />
           </PaginationItem>
-          <div className="flex flex-row">{renderPageNumbers()}</div>
+          <li>
+            <ul className="flex flex-row">
+              {renderPageNumbers()}
+            </ul>
+          </li>
           <PaginationItem>
             <PaginationNext
               href={buildLink([

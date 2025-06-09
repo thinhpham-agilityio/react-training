@@ -60,7 +60,7 @@ const Header = () => {
             <div className="flex items-center gap-2">
               <Sheet>
                 <SheetTrigger asChild>
-                  <Button variant="outline" size="icon">
+                  <Button id="nav-menu" aria-label="nav-menu" variant="outline" size="icon">
                     <Menu className="size-4" />
                   </Button>
                 </SheetTrigger>
