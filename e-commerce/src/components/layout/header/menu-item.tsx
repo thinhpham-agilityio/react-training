@@ -29,18 +29,4 @@ const MenuItem = (item: MenuItemProps) => {
   );
 };
 
-const MobileMenuItem = (item: MenuItemProps) => {
-  const path = usePathname();
-
-  return (
-    <Link
-      key={item.title}
-      href={item.url}
-      className={path.includes(item.url) ? 'text-active' : ''}
-    >
-      {item.title}
-    </Link>
-  );
-};
-
-export { MenuItem, MobileMenuItem };
+export { MenuItem };

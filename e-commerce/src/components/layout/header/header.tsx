@@ -1,33 +1,12 @@
-import { Menu } from 'lucide-react';
-
-import { Accordion } from '@/components/common/ui/accordion';
-import { Button } from '@/components/common/ui/button';
 import {
   NavigationMenu,
   NavigationMenuList
 } from '@/components/common/ui/navigation-menu';
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger
-} from '@/components/common/ui/sheet';
 import Logo from './logo';
-import { MenuItem, MobileMenuItem } from './menu-item';
+import { MenuItem } from './menu-item';
 import RightNav from './right-nav';
-
-const menu = [
-  { title: 'Shop', url: '/shop' },
-  {
-    title: 'On sale',
-    url: '/#on-sale'
-  },
-  {
-    title: 'New arrivals',
-    url: '/#new-arrivals'
-  }
-];
+import MobileHeader from './mobile-header';
+import { MENU_LIST } from '@/constants/page';
 
 const Header = () => {
   return (
@@ -40,7 +19,7 @@ const Header = () => {
             <div className="flex items-center">
               <NavigationMenu>
                 <NavigationMenuList>
-                  {menu.map((item) => (
+                  {MENU_LIST.map((item) => (
                     <MenuItem
                       key={item.title}
                       title={item.title}
@@ -54,44 +33,7 @@ const Header = () => {
           <RightNav />
         </nav>
 
-        {/* Mobile Menu */}
-        <div className="block px-3 lg:hidden">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Sheet>
-                <SheetTrigger asChild>
-                  <Button id="nav-menu" aria-label="nav-menu" variant="outline" size="icon">
-                    <Menu className="size-4" />
-                  </Button>
-                </SheetTrigger>
-                <SheetContent className="overflow-y-auto" side="left">
-                  <SheetHeader>
-                    <SheetTitle>
-                      <Logo />
-                    </SheetTitle>
-                  </SheetHeader>
-                  <div className="flex flex-col gap-6 p-4">
-                    <Accordion
-                      type="single"
-                      collapsible
-                      className="flex w-full flex-col gap-4"
-                    >
-                      {menu.map((item) => (
-                        <MobileMenuItem
-                          key={item.title}
-                          title={item.title}
-                          url={item.url}
-                        />
-                      ))}
-                    </Accordion>
-                  </div>
-                </SheetContent>
-              </Sheet>
-              <Logo />
-            </div>
-            <RightNav />
-          </div>
-        </div>
+        <MobileHeader />
       </div>
     </header>
   );
