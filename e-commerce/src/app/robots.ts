@@ -7,7 +7,7 @@ export const robots = (): MetadataRoute.Robots => ({
     allow: [ROUTES.LOGIN, ROUTES.HOME, ROUTES.SHOP],
     disallow: [ROUTES.CART, ROUTES.PROFILE]
   },
-  sitemap: `${process.env.NEXT_PUBLIC_API_URL}/sitemap.xml`
+  sitemap: `${process.env.BASE_URL}/sitemap.xml`
 });
 
 export default robots;
