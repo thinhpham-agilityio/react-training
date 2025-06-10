@@ -33,12 +33,12 @@ export function createMetadata(options: MetaOptions = {}): Metadata {
   const description = options.description || 'Browser out the lastet products';
   const url = options.url || defaultMeta.baseUrl;
   const imageUrl =
-    defaultMeta.baseUrl +
+    defaultMeta.baseUrl + '/images' +
     (defaultMeta.image.startsWith('/')
       ? defaultMeta.image
       : '/' + defaultMeta.image);
   const twitterImageUrl =
-    defaultMeta.baseUrl +
+    defaultMeta.baseUrl + '/images' +
     (defaultMeta.twitterImage.startsWith('/')
       ? defaultMeta.twitterImage
       : '/' + defaultMeta.twitterImage);
