@@ -1,4 +1,7 @@
+import { BASE_URL } from '@/constants/url';
+
 import LoginForm from '@/components/features/auth/login/login-form';
+
 import { createMetadata } from '@/utils/metadata';
 
 export const metadata = createMetadata({
@@ -6,7 +9,7 @@ export const metadata = createMetadata({
   description:
     'Login to your Shop.co account to access exclusive deals and manage your profile.',
   keywords: ['login', 'authentication', 'user', 'Shop.co'],
-  url: 'https://react-training-beta-dun.vercel.app/login',
+  url: `${BASE_URL}/login`,
   imageAlt: 'Shop.co Login'
 });
 

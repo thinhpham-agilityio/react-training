@@ -1,10 +1,11 @@
 import { createMetadata } from '@/utils/metadata';
+import { BASE_URL } from '@/constants/url';
 
 export const metadata = createMetadata({
   title: 'Shopping',
   description: 'Browse and shop the latest products on Shop.co',
   keywords: ['shopping', 'products', 'Shop.co', 'deals'],
-  url: 'https://react-training-beta-dun.vercel.app/shop',
+  url: `${BASE_URL}/shop`,
   imageAlt: 'Shop.co Shopping',
 });
 

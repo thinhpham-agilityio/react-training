@@ -1,11 +1,14 @@
+import { BASE_URL } from '@/constants/url';
+
 import ProfileSection from '@/components/features/user/profile/profile-section';
+
 import { createMetadata } from '@/utils/metadata';
 
 export const metadata = createMetadata({
   title: 'Profile',
   description: 'View and manage your user profile on Shop.co',
   keywords: ['profile', 'user', 'account', 'Shop.co'],
-  url: 'https://react-training-beta-dun.vercel.app/profile',
+  url: `${BASE_URL}/profile`,
   imageAlt: 'Shop.co Profile',
   type: 'profile'
 });

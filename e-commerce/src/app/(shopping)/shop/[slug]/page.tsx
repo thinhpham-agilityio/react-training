@@ -2,6 +2,7 @@ import ProductDetailSection from '@/components/features/shopping/product-detail/
 
 import { createMetadata } from '@/utils/metadata';
 import { getProductDetail } from '@/actions/product-detail';
+import { BASE_URL } from '@/constants/url';
 
 interface ProductDetailParams {
   params: Promise<{ slug: string }>;
@@ -15,7 +16,7 @@ export async function generateMetadata({ params }: ProductDetailParams) {
   return createMetadata({
     title: product.title,
     description: product.description,
-    url: `https://react-training-beta-dun.vercel.app/shop/${slug}`,
+    url: `${BASE_URL}/shop/${slug}`,
     imageAlt: product.title,
     keywords: [product.title, 'Shop.co', 'product']
   });

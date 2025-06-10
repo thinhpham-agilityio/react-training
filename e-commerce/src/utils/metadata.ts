@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 
+import { BASE_URL } from '@/constants/url';
+
 type OpenGraphType = 'website' | 'profile';
 
 interface MetaOptions {
@@ -13,7 +15,7 @@ interface MetaOptions {
 
 const defaultMeta = {
   siteName: 'Shop.co',
-  baseUrl: 'https://react-training-beta-dun.vercel.app',
+  baseUrl: BASE_URL,
   author: 'Thinh Pham',
   twitter: '@shopco',
   image: '/hero-image.jpg',
@@ -84,6 +86,6 @@ export function createMetadata(options: MetaOptions = {}): Metadata {
       site: defaultMeta.twitter,
       creator: defaultMeta.twitter
     },
-    metadataBase: new URL(defaultMeta.baseUrl),
+    metadataBase: new URL(defaultMeta.baseUrl)
   };
 }
