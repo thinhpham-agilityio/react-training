@@ -18,8 +18,8 @@ const defaultMeta = {
   baseUrl: BASE_URL,
   author: 'Thinh Pham',
   twitter: '@shopco',
-  image: '/hero-image.jpg',
-  twitterImage: '/hero-image.jpg',
+  image: '/meta.png',
+  twitterImage: '/meta.png',
   locale: 'en_US'
 };
 
