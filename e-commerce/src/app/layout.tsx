@@ -23,10 +23,10 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <body className="flex min-h-screen flex-col">
         <AppProvider>
-          <div>
+          <main>
             <Header />
             <div className="mt-[72px]">{children}</div>
-          </div>
+          </main>
           <Footer />
           <Toaster />
         </AppProvider>
