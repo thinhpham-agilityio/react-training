@@ -5,14 +5,15 @@ import {
   useContext,
   useMemo,
   useReducer,
-  useEffect,
+  useEffect
 } from 'react';
+import _ from 'lodash';
 import { CART_STORAGE } from '@/constants/storage';
 import { Cart, CartItem } from '@/types/cart';
 import { Product } from '@/types/products';
+
 import { calculateTotalPrice } from '@/utils/calculate';
 import useSessionStorage from './use-session-storage';
-import _ from 'lodash';
 
 interface CartContextProps {
   cart: Cart;
@@ -66,7 +67,7 @@ type CartAction =
   | {
       type: typeof CART_ACTIONS.UPDATE_DISCOUNT;
       payload: { discount: number };
-  }
+    }
   | { type: typeof CART_ACTIONS.GET_CART; payload: { cart: Cart } };
 
 function cartReducer(state: Cart, action: CartAction): Cart {
@@ -75,6 +76,7 @@ function cartReducer(state: Cart, action: CartAction): Cart {
       const { product, quantity } = action.payload;
       const existingItem = state.items.find((item) => item.id === product.id);
       let newItems;
+
       if (existingItem) {
         newItems = state.items.map((item) =>
           item.id === product.id
@@ -95,11 +97,13 @@ function cartReducer(state: Cart, action: CartAction): Cart {
           }
         ];
       }
+
       const { subTotal, total } = calculateTotalPrice(
         newItems,
         state.discount,
         state.fee
       );
+
       return {
         ...state,
         items: newItems,
@@ -116,6 +120,7 @@ function cartReducer(state: Cart, action: CartAction): Cart {
         state.discount,
         state.fee
       );
+
       return {
         ...state,
         items: newItems,
@@ -125,6 +130,7 @@ function cartReducer(state: Cart, action: CartAction): Cart {
     }
     case CART_ACTIONS.UPDATE_QUANTITY: {
       const { itemId, quantity } = action.payload;
+
       if (quantity <= 0) {
         const newItems = state.items.filter((item) => item.id !== itemId);
         const { subTotal, total } = calculateTotalPrice(
@@ -132,6 +138,7 @@ function cartReducer(state: Cart, action: CartAction): Cart {
           state.discount,
           state.fee
         );
+
         return {
           ...state,
           items: newItems,
@@ -147,6 +154,7 @@ function cartReducer(state: Cart, action: CartAction): Cart {
           state.discount,
           state.fee
         );
+
         return {
           ...state,
           items: newItems,
@@ -165,6 +173,7 @@ function cartReducer(state: Cart, action: CartAction): Cart {
         discount,
         state.fee
       );
+
       return { ...state, discount, subTotalPrice: subTotal, totalPrice: total };
     }
     case CART_ACTIONS.GET_CART: {
@@ -205,8 +214,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     if (storedValue) {
       dispatch({ type: CART_ACTIONS.GET_CART, payload: { cart: storedValue } });
     }
-  }
-  , [storedValue]);
+  }, [storedValue]);
 
   const findItemInCart = useCallback(
     (itemId: number) => cart.items.find((item) => item.id === itemId),
