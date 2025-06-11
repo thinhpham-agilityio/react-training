@@ -52,3 +52,8 @@ export interface ProductResponse {
   };
   pagination: Pagination;
 }
+
+export interface ProductListResponse {
+  products: Product[];
+  pagination: Pagination;
+}

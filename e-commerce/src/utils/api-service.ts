@@ -15,7 +15,7 @@ interface RequestOptions {
   [key: string]: any;
 }
 
-class ApiService {
+export class ApiService {
   private baseUrl: string;
 
   constructor(baseUrl: string = process.env.NEXT_PUBLIC_API_URL || '') {
