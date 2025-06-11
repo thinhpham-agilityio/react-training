@@ -26,9 +26,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         try {
           let user = null;
 
-          const { email, password } = await signInSchema.parseAsync(
-            credentials
-          );
+          const { email, password } =
+            await signInSchema.parseAsync(credentials);
 
           // logic to verify if the user exists
           user = await getUserFromDb(email, password);
@@ -50,7 +49,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     })
   ],
   pages: {
-    signIn: '/login'
+    signIn: ROUTES.LOGIN
   },
   callbacks: {
     authorized: async ({ auth, request: { nextUrl } }) => {

@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { ShoppingCart } from 'lucide-react';
 
+import { ROUTES } from '@/constants/routes';
+
 import useCartContext from '@/hooks/use-cart-context';
 
 const ShoppingCartIcon = () => {
@@ -14,7 +16,7 @@ const ShoppingCartIcon = () => {
   );
 
   return (
-    <Link href="/cart" passHref>
+    <Link href={ROUTES.CART} passHref>
       <div className="relative">
         <ShoppingCart />
         {itemCount > 0 && (

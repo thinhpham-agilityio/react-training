@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { ROUTES } from '@/constants/routes';
+
 import {
   Card,
   CardContent,
@@ -39,7 +41,7 @@ const ProductCard = ({
         className
       )}
     >
-      <Link href={`/shop/${id}`} className="block">
+      <Link href={`${ROUTES.SHOP}/${id}`} className="block">
         <figure className="bg-shade-300 relative mb-4 aspect-[86/87] overflow-hidden rounded-[1.25rem]">
           <Image
             fill
@@ -52,7 +54,7 @@ const ProductCard = ({
       </Link>
 
       <CardHeader>
-        <Link href={`/shop/${id}`} className="block">
+        <Link href={`${ROUTES.SHOP}/${id}`} className="block">
           <CardTitle className="line-clamp-1 text-base md:text-xl">
             {title}
           </CardTitle>

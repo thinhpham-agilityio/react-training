@@ -1,11 +1,12 @@
 import { createMetadata } from '@/utils/metadata';
 import { BASE_URL } from '@/constants/url';
+import { ROUTES } from '@/constants/routes';
 
 export const metadata = createMetadata({
   title: 'Shopping',
   description: 'Browse and shop the latest products on Shop.co',
   keywords: ['shopping', 'products', 'Shop.co', 'deals'],
-  url: `${BASE_URL}/shop`,
+  url: `${BASE_URL}${ROUTES.SHOP}`,
   imageAlt: 'Shop.co Shopping',
 });
 

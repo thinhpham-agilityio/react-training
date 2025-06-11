@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+
+import { ROUTES } from '@/constants/routes';
 
 import { Button } from '@/components/common/ui/button';
 import { Skeleton } from '@/components/common/ui/skeleton';
@@ -15,6 +17,7 @@ const ProfileSection = () => {
   const { data: session, status, update } = useSession();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const { clearCart } = useCartContext();
+  const router = useRouter();
 
   const email = session?.user?.email || '';
 
@@ -30,7 +33,7 @@ const ProfileSection = () => {
       return;
     }
 
-    redirect('/');
+    router.push(ROUTES.HOME);
   };
 
   return (

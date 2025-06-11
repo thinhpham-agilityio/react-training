@@ -1,6 +1,9 @@
-import { convertNumberToString } from '@/utils/text';
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
+
+import { ROUTES } from '@/constants/routes';
+
+import { convertNumberToString } from '@/utils/text';
 
 const stats = [
   {
@@ -34,7 +37,7 @@ const HeroSection = () => {
             </p>
 
             <Link
-              href="/shop"
+              href={ROUTES.SHOP}
               className="bg-secondary text-contained w-full rounded-xl px-14 py-4 text-sm font-semibold md:w-fit"
             >
               Shop Now

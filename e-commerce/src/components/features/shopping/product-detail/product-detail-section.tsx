@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 
 import { PROMOTION_PRODUCTS_LIMIT } from '@/constants/skeleton';
+import { ROUTES } from '@/constants/routes';
 import { Product } from '@/types/products';
 
 import ProductCardListSkeleton from '@/components/common/skeleton/product-card-list-skeleton';
@@ -20,8 +21,8 @@ const ProductDetailSection = ({ product }: ProductDetailSectionProps) => {
     <div>
       <BreadCrumbList
         routes={[
-          { text: 'Home', href: '/' },
-          { text: 'Shop', href: '/shop' },
+          { text: 'Home', href: ROUTES.HOME },
+          { text: 'Shop', href: ROUTES.SHOP },
           { text: product.title }
         ]}
       />

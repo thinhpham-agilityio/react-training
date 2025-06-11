@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import Link from 'next/link';
 
 import { PROMOTION_PRODUCTS_LIMIT } from '@/constants/skeleton';
+import { ROUTES } from '@/constants/routes';
 
 import ProductPromotionList from '@/components/features/home/product-promotion-list';
 import { Button } from '@/components/common/ui/button';
@@ -36,7 +37,7 @@ const ProductPromotionSection = async ({
       <div className="col-span-full mt-4 mb-12 w-full md:mb-20">
         <div className="flex items-center justify-center">
           <Link
-            href="/shop"
+            href={ROUTES.SHOP}
             className="flex w-full items-center justify-center"
           >
             <Button

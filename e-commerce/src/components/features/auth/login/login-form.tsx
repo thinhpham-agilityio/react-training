@@ -1,12 +1,14 @@
 'use client';
 import { useState } from 'react';
 import { EyeIcon, EyeOffIcon, LockIcon, MailIcon } from 'lucide-react';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSession } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
+
+import { ROUTES } from '@/constants/routes';
 
 import { Button } from '@/components/common/ui/button';
 import { Input } from '@/components/common/ui/input';
@@ -17,6 +19,7 @@ import { userSignIn } from '@/actions/auth';
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { update } = useSession();
+  const router = useRouter();
 
   type FormData = z.infer<typeof signInSchema>;
   const {
@@ -51,7 +54,7 @@ const LoginForm = () => {
       return;
     }
 
-    redirect('/');
+    router.push(ROUTES.HOME);
   };
 
   return (

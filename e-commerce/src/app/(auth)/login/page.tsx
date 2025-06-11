@@ -1,4 +1,5 @@
 import { BASE_URL } from '@/constants/url';
+import { ROUTES } from '@/constants/routes';
 
 import LoginForm from '@/components/features/auth/login/login-form';
 
@@ -9,7 +10,7 @@ export const metadata = createMetadata({
   description:
     'Login to your Shop.co account to access exclusive deals and manage your profile.',
   keywords: ['login', 'authentication', 'user', 'Shop.co'],
-  url: `${BASE_URL}/login`,
+  url: `${BASE_URL}${ROUTES.LOGIN}`,
   imageAlt: 'Shop.co Login'
 });
 

@@ -4,12 +4,13 @@ import BreadCrumbList from '@/components/layout/breadcrumb/breadcrumb-list';
 import CartOrderSummary from '@/components/features/shopping/cart/cart-order-summary';
 import CartSection from '@/components/features/shopping/cart/cart-section';
 import { BASE_URL } from '@/constants/url';
+import { ROUTES } from '@/constants/routes';
 
 export const metadata = createMetadata({
   title: 'Cart',
   description: 'View and manage the products in your shopping cart on Shop.co',
   keywords: ['cart', 'shopping cart', 'Shop.co', 'checkout'],
-  url: `${BASE_URL}/cart`,
+  url: `${BASE_URL}${ROUTES.CART}`,
   imageAlt: 'Shop.co Cart'
 });
 

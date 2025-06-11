@@ -3,6 +3,7 @@ import ProductDetailSection from '@/components/features/shopping/product-detail/
 import { createMetadata } from '@/utils/metadata';
 import { getProductDetail } from '@/actions/product-detail';
 import { BASE_URL } from '@/constants/url';
+import { ROUTES } from '@/constants/routes';
 
 interface ProductDetailParams {
   params: Promise<{ slug: string }>;
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: ProductDetailParams) {
   return createMetadata({
     title: product.title,
     description: product.description,
-    url: `${BASE_URL}/shop/${slug}`,
+    url: `${BASE_URL}${ROUTES.SHOP}/${slug}`,
     imageAlt: product.title,
     keywords: [product.title, 'Shop.co', 'product']
   });

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { PackageX } from 'lucide-react';
+import { ROUTES } from '@/constants/routes';
 
 export default function NotFound() {
   return (
@@ -11,7 +12,7 @@ export default function NotFound() {
       <p className="text-gray mb-6 max-w-md text-lg">
         The product you are looking for does not exist or may have been removed.
       </p>
-      <Link href="/shop">
+      <Link href={ROUTES.SHOP}>
         <span className="bg-primary hover:bg-primary/90 text-contained inline-block rounded-lg px-6 py-2 font-semibold shadow transition-colors">
           Back to Shop
         </span>
