@@ -18,7 +18,7 @@ interface ProductListPageProps {
   }>;
 }
 
-export default async function ShopLayout({ searchParams }: ProductListPageProps) {
+export default async function ShopPage({ searchParams }: ProductListPageProps) {
   const params = await searchParams;
 
   return (
